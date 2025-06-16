@@ -44,11 +44,11 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Services</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+            Our <span className="text-red-500">Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We specialize in creating custom websites tailored to your industry needs. 
@@ -58,19 +58,19 @@ const Services = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
+            <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 shadow-lg">
               <CardHeader className="text-center pb-4">
-                <div className="mx-auto mb-4 p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-fit group-hover:scale-110 transition-transform duration-300">
+                <div className="mx-auto mb-4 p-3 bg-red-500 rounded-full w-fit group-hover:scale-110 transition-transform duration-300">
                   <service.icon className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-xl font-bold text-gray-900">{service.title}</CardTitle>
+                <CardTitle className="text-xl font-bold text-black">{service.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center text-sm text-gray-700">
-                      <div className="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                      <div className="w-2 h-2 bg-red-500 rounded-full mr-3"></div>
                       {feature}
                     </li>
                   ))}

@@ -12,12 +12,12 @@ const About = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white">
+    <section className="py-20 bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              About <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">WebCraft Agency</span>
+              About <span className="text-red-500">DevotedZen Web</span>
             </h2>
             <p className="text-xl text-gray-300 mb-6">
               We are a passionate team of web designers and developers dedicated to creating 
@@ -32,19 +32,19 @@ const About = () => {
             
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <span className="text-gray-300">Custom web design and development</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <span className="text-gray-300">Mobile-responsive and SEO-optimized</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <span className="text-gray-300">Ongoing support and maintenance</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"></div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <span className="text-gray-300">Fast turnaround and competitive pricing</span>
               </div>
             </div>
@@ -52,9 +52,9 @@ const About = () => {
           
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300">
+              <Card key={index} className="bg-gray-900 border-gray-800 hover:bg-gray-800 transition-all duration-300">
                 <CardContent className="p-6 text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-red-500 rounded-full mb-4">
                     <stat.icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="text-3xl font-bold text-white mb-2">{stat.number}</h3>

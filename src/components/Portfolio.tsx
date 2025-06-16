@@ -51,11 +51,11 @@ const Portfolio = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Our <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Portfolio</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+            Our <span className="text-red-500">Portfolio</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover some of our recent projects and see how we've helped businesses 
@@ -81,11 +81,11 @@ const Portfolio = () => {
               </div>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                  <span className="text-sm font-medium text-red-500 bg-red-50 px-3 py-1 rounded-full">
                     {project.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                <h3 className="text-xl font-bold text-black mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, idx) => (
@@ -100,7 +100,7 @@ const Portfolio = () => {
         </div>
         
         <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
+          <Button size="lg" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
             View All Projects
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>

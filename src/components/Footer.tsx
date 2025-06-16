@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/lovable-uploads/c237c354-fb60-431c-acd3-e1182e9cc834.png" 
+                src="/lovable-uploads/97537c12-5e95-41fd-b413-ebd9803ded0c.png" 
                 alt="DevotedZen Web Logo" 
                 className="h-8 w-auto"
               />
