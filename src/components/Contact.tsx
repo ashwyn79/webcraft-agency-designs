@@ -35,11 +35,11 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="contact" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-            Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
+            Get In <span className="text-red-500">Touch</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to transform your business with a stunning website? 
@@ -53,12 +53,12 @@ const Contact = () => {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
+                  <div className="p-3 bg-red-500 rounded-full">
                     <Mail className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Email Us</h3>
-                    <p className="text-gray-600">hello@webcraftagency.com</p>
+                    <p className="text-gray-600">hello@devotedzenweb.com</p>
                   </div>
                 </div>
               </CardContent>
@@ -67,7 +67,7 @@ const Contact = () => {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
+                  <div className="p-3 bg-red-500 rounded-full">
                     <Phone className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -81,7 +81,7 @@ const Contact = () => {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full">
+                  <div className="p-3 bg-red-500 rounded-full">
                     <MapPin className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -92,23 +92,23 @@ const Contact = () => {
               </CardContent>
             </Card>
             
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+            <div className="bg-black rounded-xl p-6 text-white">
               <h3 className="text-xl font-bold mb-4">Why Choose Us?</h3>
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span>Free consultation & quote</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span>Quick turnaround time</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span>Ongoing support included</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                   <span>100% satisfaction guarantee</span>
                 </li>
               </ul>
@@ -136,7 +136,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Your full name"
-                        className="border-gray-300 focus:border-blue-600 focus:ring-blue-600"
+                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                       />
                     </div>
                     <div>
@@ -151,7 +151,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="your@email.com"
-                        className="border-gray-300 focus:border-blue-600 focus:ring-blue-600"
+                        className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                       />
                     </div>
                   </div>
@@ -167,7 +167,7 @@ const Contact = () => {
                       value={formData.business}
                       onChange={handleChange}
                       placeholder="e.g., Restaurant, Hotel, School, etc."
-                      className="border-gray-300 focus:border-blue-600 focus:ring-blue-600"
+                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
                   
@@ -183,14 +183,14 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Tell us about your project requirements, timeline, and budget..."
-                      className="border-gray-300 focus:border-blue-600 focus:ring-blue-600"
+                      className="border-gray-300 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
                   
                   <Button 
                     type="submit" 
                     size="lg" 
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-full transition-all duration-300 hover:scale-105"
+                    className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-full transition-all duration-300 hover:scale-105"
                   >
                     Send Message
                     <Send className="ml-2 h-5 w-5" />

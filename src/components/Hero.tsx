@@ -16,15 +16,6 @@ const Hero = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center justify-center min-h-screen text-center text-white pt-16">
           <div className="animate-fade-in">
-            {/* Logo Section */}
-            <div className="mb-8">
-              <img 
-                src="/lovable-uploads/97537c12-5e95-41fd-b413-ebd9803ded0c.png" 
-                alt="DevotedZen Web Logo" 
-                className="h-20 w-auto mx-auto mb-4"
-              />
-            </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6">
               <span className="text-white">DevotedZen</span>{' '}
               <span className="text-red-500">Web</span>
