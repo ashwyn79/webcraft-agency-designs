@@ -6,11 +6,13 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Edit, Trash2, MessageCircle, FileText } from 'lucide-react';
+import { Plus, Edit, Trash2, MessageCircle, FileText, Upload, Image as ImageIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import CMSLogin from '@/components/CMSLogin';
 
 const Admin = () => {
   const { toast } = useToast();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [portfolioItems, setPortfolioItems] = useState([
     {
       id: 1,
@@ -20,6 +22,17 @@ const Admin = () => {
       description: 'Modern school website with student portal, event calendar, and online learning management system.',
       tags: ['Education', 'CMS', 'Student Portal']
     }
+  ]);
+
+  const [categories] = useState([
+    'Educational',
+    'Hospitality',
+    'Restaurant',
+    'Small Business',
+    'E-commerce',
+    'Healthcare',
+    'Real Estate',
+    'Technology'
   ]);
 
   const [messages, setMessages] = useState([
@@ -55,6 +68,26 @@ const Admin = () => {
   });
 
   const [editingPortfolio, setEditingPortfolio] = useState(null);
+
+  if (!isLoggedIn) {
+    return <CMSLogin onLogin={() => setIsLoggedIn(true)} />;
+  }
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target?.result as string;
+        setNewPortfolio({ ...newPortfolio, image: imageUrl });
+        toast({
+          title: "Image Uploaded",
+          description: "Image has been uploaded successfully.",
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleAddPortfolio = () => {
     if (newPortfolio.title && newPortfolio.category) {
@@ -122,12 +155,25 @@ const Admin = () => {
     });
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    toast({
+      title: "Logged Out",
+      description: "You have been logged out successfully.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="container mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">DevotedZen Web CMS</h1>
-          <p className="text-gray-600">Manage your website content and portfolio</p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">DevotedZen Web CMS</h1>
+            <p className="text-gray-600">Manage your website content and portfolio</p>
+          </div>
+          <Button variant="outline" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
 
         <Tabs defaultValue="portfolio" className="space-y-6">
@@ -153,17 +199,46 @@ const Admin = () => {
                     value={newPortfolio.title}
                     onChange={(e) => setNewPortfolio({ ...newPortfolio, title: e.target.value })}
                   />
-                  <Input
-                    placeholder="Category"
+                  <select
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     value={newPortfolio.category}
                     onChange={(e) => setNewPortfolio({ ...newPortfolio, category: e.target.value })}
-                  />
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
+                  </select>
                 </div>
-                <Input
-                  placeholder="Image URL"
-                  value={newPortfolio.image}
-                  onChange={(e) => setNewPortfolio({ ...newPortfolio, image: e.target.value })}
-                />
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Upload Image</label>
+                  <div className="flex items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      id="image-upload"
+                    />
+                    <label htmlFor="image-upload" className="cursor-pointer">
+                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+                        <Upload className="h-4 w-4" />
+                        Upload Image
+                      </div>
+                    </label>
+                    {newPortfolio.image && (
+                      <div className="flex items-center gap-2">
+                        <ImageIcon className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-green-500">Image uploaded</span>
+                      </div>
+                    )}
+                  </div>
+                  {newPortfolio.image && (
+                    <img src={newPortfolio.image} alt="Preview" className="w-32 h-24 object-cover rounded-md" />
+                  )}
+                </div>
+                
                 <Textarea
                   placeholder="Project Description"
                   value={newPortfolio.description}

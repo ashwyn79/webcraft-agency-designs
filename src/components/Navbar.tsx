@@ -61,6 +61,7 @@ const Navbar = () => {
             
             <button onClick={() => handleScroll('portfolio')} className="text-white hover:text-red-500 transition-colors">Portfolio</button>
             <button onClick={() => handleScroll('about')} className="text-white hover:text-red-500 transition-colors">About</button>
+            <button onClick={() => handleScroll('pricing')} className="text-white hover:text-red-500 transition-colors">Pricing</button>
             <button onClick={() => handleScroll('contact')} className="text-white hover:text-red-500 transition-colors">Contact</button>
             
             <Button onClick={() => handleScroll('contact')} className="bg-red-500 hover:bg-red-600 text-white">
@@ -85,6 +86,7 @@ const Navbar = () => {
               <button onClick={() => handleScroll('services')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Services</button>
               <button onClick={() => handleScroll('portfolio')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Portfolio</button>
               <button onClick={() => handleScroll('about')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">About</button>
+              <button onClick={() => handleScroll('pricing')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Pricing</button>
               <button onClick={() => handleScroll('contact')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Contact</button>
               <div className="px-3 py-2">
                 <Button onClick={() => handleScroll('contact')} className="w-full bg-red-500 hover:bg-red-600 text-white">
