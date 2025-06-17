@@ -5,14 +5,25 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Edit, Trash2, MessageCircle, FileText, Upload, Image as ImageIcon } from 'lucide-react';
+import { Plus, Edit, Trash2, MessageCircle, FileText, Upload, Image as ImageIcon, Users, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import CMSLogin from '@/components/CMSLogin';
 
 const Admin = () => {
   const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [portfolioItems, setPortfolioItems] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      email: 'dhruvarajthakuri@gmail.com',
+      password: '@shwin2059',
+      role: 'admin',
+      name: 'Admin User'
+    }
+  ]);
 
   const [categories] = useState([
     'Educational',
@@ -57,9 +68,24 @@ const Admin = () => {
     tags: ''
   });
 
-  const [editingPortfolio, setEditingPortfolio] = useState(null);
+  const [newUser, setNewUser] = useState({
+    email: '',
+    password: '',
+    name: '',
+    role: 'editor'
+  });
 
-  // Content management state
+  const [newTestimonial, setNewTestimonial] = useState({
+    name: '',
+    position: '',
+    testimonial: '',
+    profilePicture: ''
+  });
+
+  const [editingPortfolio, setEditingPortfolio] = useState(null);
+  const [editingUser, setEditingUser] = useState(null);
+  const [editingTestimonial, setEditingTestimonial] = useState(null);
+
   const [siteContent, setSiteContent] = useState({
     companyEmail: 'contact@devotedzen.com',
     phoneNumber: '9848923375',
@@ -82,6 +108,8 @@ const Admin = () => {
     // Load data from localStorage
     const savedPortfolio = localStorage.getItem('portfolioItems');
     const savedContent = localStorage.getItem('siteContent');
+    const savedUsers = localStorage.getItem('cmsUsers');
+    const savedTestimonials = localStorage.getItem('testimonials');
     
     if (savedPortfolio) {
       setPortfolioItems(JSON.parse(savedPortfolio));
@@ -90,10 +118,21 @@ const Admin = () => {
     if (savedContent) {
       setSiteContent(JSON.parse(savedContent));
     }
+
+    if (savedUsers) {
+      setUsers(JSON.parse(savedUsers));
+    }
+
+    if (savedTestimonials) {
+      setTestimonials(JSON.parse(savedTestimonials));
+    }
   }, []);
 
   if (!isLoggedIn) {
-    return <CMSLogin onLogin={() => setIsLoggedIn(true)} />;
+    return <CMSLogin onLogin={(user) => {
+      setIsLoggedIn(true);
+      setCurrentUser(user);
+    }} users={users} />;
   }
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,6 +149,144 @@ const Admin = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleProfilePictureUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target?.result as string;
+        setNewTestimonial({ ...newTestimonial, profilePicture: imageUrl });
+        toast({
+          title: "Profile Picture Uploaded",
+          description: "Profile picture has been uploaded successfully.",
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleAddUser = () => {
+    if (newUser.email && newUser.password && newUser.name) {
+      const user = {
+        id: Date.now(),
+        ...newUser
+      };
+      const updatedUsers = [...users, user];
+      setUsers(updatedUsers);
+      localStorage.setItem('cmsUsers', JSON.stringify(updatedUsers));
+      setNewUser({ email: '', password: '', name: '', role: 'editor' });
+      toast({
+        title: "User Added",
+        description: "New user has been added successfully.",
+      });
+    }
+  };
+
+  const handleEditUser = (user) => {
+    setEditingUser(user);
+    setNewUser({
+      email: user.email,
+      password: user.password,
+      name: user.name,
+      role: user.role
+    });
+  };
+
+  const handleUpdateUser = () => {
+    if (editingUser) {
+      const updatedUser = {
+        ...editingUser,
+        ...newUser
+      };
+      const updatedUsers = users.map(user => 
+        user.id === editingUser.id ? updatedUser : user
+      );
+      setUsers(updatedUsers);
+      localStorage.setItem('cmsUsers', JSON.stringify(updatedUsers));
+      setEditingUser(null);
+      setNewUser({ email: '', password: '', name: '', role: 'editor' });
+      toast({
+        title: "User Updated",
+        description: "User has been updated successfully.",
+      });
+    }
+  };
+
+  const handleDeleteUser = (id) => {
+    if (users.find(u => u.id === id)?.role === 'admin' && users.filter(u => u.role === 'admin').length === 1) {
+      toast({
+        title: "Cannot Delete",
+        description: "Cannot delete the last admin user.",
+        variant: "destructive",
+      });
+      return;
+    }
+    const updatedUsers = users.filter(user => user.id !== id);
+    setUsers(updatedUsers);
+    localStorage.setItem('cmsUsers', JSON.stringify(updatedUsers));
+    toast({
+      title: "User Deleted",
+      description: "User has been deleted successfully.",
+    });
+  };
+
+  const handleAddTestimonial = () => {
+    if (newTestimonial.name && newTestimonial.testimonial) {
+      const testimonial = {
+        id: Date.now(),
+        ...newTestimonial
+      };
+      const updatedTestimonials = [...testimonials, testimonial];
+      setTestimonials(updatedTestimonials);
+      localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
+      setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+      toast({
+        title: "Testimonial Added",
+        description: "New testimonial has been added successfully.",
+      });
+    }
+  };
+
+  const handleEditTestimonial = (testimonial) => {
+    setEditingTestimonial(testimonial);
+    setNewTestimonial({
+      name: testimonial.name,
+      position: testimonial.position,
+      testimonial: testimonial.testimonial,
+      profilePicture: testimonial.profilePicture
+    });
+  };
+
+  const handleUpdateTestimonial = () => {
+    if (editingTestimonial) {
+      const updatedTestimonial = {
+        ...editingTestimonial,
+        ...newTestimonial
+      };
+      const updatedTestimonials = testimonials.map(testimonial => 
+        testimonial.id === editingTestimonial.id ? updatedTestimonial : testimonial
+      );
+      setTestimonials(updatedTestimonials);
+      localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
+      setEditingTestimonial(null);
+      setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+      toast({
+        title: "Testimonial Updated",
+        description: "Testimonial has been updated successfully.",
+      });
+    }
+  };
+
+  const handleDeleteTestimonial = (id) => {
+    const updatedTestimonials = testimonials.filter(testimonial => testimonial.id !== id);
+    setTestimonials(updatedTestimonials);
+    localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
+    toast({
+      title: "Testimonial Deleted",
+      description: "Testimonial has been deleted successfully.",
+    });
   };
 
   const handleAddPortfolio = () => {
@@ -194,6 +371,7 @@ const Admin = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setCurrentUser(null);
     toast({
       title: "Logged Out",
       description: "You have been logged out successfully.",
@@ -206,7 +384,9 @@ const Admin = () => {
         <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">DevotedZen Web CMS</h1>
-            <p className="text-gray-600 text-sm sm:text-base">Manage your website content and portfolio</p>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Welcome, {currentUser?.name} ({currentUser?.role})
+            </p>
           </div>
           <Button variant="outline" onClick={handleLogout} className="self-start sm:self-auto">
             Logout
@@ -214,9 +394,13 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="portfolio" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto">
             <TabsTrigger value="portfolio" className="text-xs sm:text-sm py-2">Portfolio</TabsTrigger>
             <TabsTrigger value="content" className="text-xs sm:text-sm py-2">Content</TabsTrigger>
+            <TabsTrigger value="testimonials" className="text-xs sm:text-sm py-2">Testimonials</TabsTrigger>
+            {currentUser?.role === 'admin' && (
+              <TabsTrigger value="users" className="text-xs sm:text-sm py-2">Users</TabsTrigger>
+            )}
             <TabsTrigger value="messages" className="text-xs sm:text-sm py-2">Messages</TabsTrigger>
             <TabsTrigger value="quotes" className="text-xs sm:text-sm py-2">Quotes</TabsTrigger>
           </TabsList>
@@ -407,6 +591,209 @@ const Admin = () => {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="testimonials" className="space-y-4 sm:space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <Star className="h-4 w-4 sm:h-5 sm:w-5" />
+                  {editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <Input
+                    placeholder="Client Name"
+                    value={newTestimonial.name}
+                    onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
+                  />
+                  <Input
+                    placeholder="Position in Company"
+                    value={newTestimonial.position}
+                    onChange={(e) => setNewTestimonial({ ...newTestimonial, position: e.target.value })}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Upload Profile Picture</label>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleProfilePictureUpload}
+                      className="hidden"
+                      id="profile-upload"
+                    />
+                    <label htmlFor="profile-upload" className="cursor-pointer">
+                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">
+                        <Upload className="h-4 w-4" />
+                        Upload Profile Picture
+                      </div>
+                    </label>
+                    {newTestimonial.profilePicture && (
+                      <div className="flex items-center gap-2">
+                        <ImageIcon className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-green-500">Profile picture uploaded</span>
+                      </div>
+                    )}
+                  </div>
+                  {newTestimonial.profilePicture && (
+                    <img src={newTestimonial.profilePicture} alt="Profile Preview" className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full" />
+                  )}
+                </div>
+                
+                <Textarea
+                  placeholder="Client Testimonial"
+                  value={newTestimonial.testimonial}
+                  onChange={(e) => setNewTestimonial({ ...newTestimonial, testimonial: e.target.value })}
+                  rows={4}
+                />
+                
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button 
+                    onClick={editingTestimonial ? handleUpdateTestimonial : handleAddTestimonial}
+                    className="bg-red-500 hover:bg-red-600"
+                  >
+                    {editingTestimonial ? 'Update' : 'Add'} Testimonial
+                  </Button>
+                  {editingTestimonial && (
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setEditingTestimonial(null);
+                        setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+              {testimonials.map((testimonial) => (
+                <Card key={testimonial.id} className="overflow-hidden">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-2">
+                        {testimonial.profilePicture && (
+                          <img src={testimonial.profilePicture} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
+                        )}
+                        <div>
+                          <h4 className="font-semibold text-sm">{testimonial.name}</h4>
+                          <p className="text-xs text-gray-600">{testimonial.position}</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        <Button size="sm" variant="outline" onClick={() => handleEditTestimonial(testimonial)}>
+                          <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                        <Button size="sm" variant="destructive" onClick={() => handleDeleteTestimonial(testimonial.id)}>
+                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 text-xs sm:text-sm italic">"{testimonial.testimonial}"</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          {currentUser?.role === 'admin' && (
+            <TabsContent value="users" className="space-y-4 sm:space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                    <Users className="h-4 w-4 sm:h-5 sm:w-5" />
+                    {editingUser ? 'Edit User' : 'Add New User'}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <Input
+                      placeholder="Full Name"
+                      value={newUser.name}
+                      onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                    />
+                    <Input
+                      placeholder="Email Address"
+                      type="email"
+                      value={newUser.email}
+                      onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <Input
+                      placeholder="Password"
+                      type="password"
+                      value={newUser.password}
+                      onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                    />
+                    <select
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      value={newUser.role}
+                      onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                    >
+                      <option value="editor">Editor</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button 
+                      onClick={editingUser ? handleUpdateUser : handleAddUser}
+                      className="bg-red-500 hover:bg-red-600"
+                    >
+                      {editingUser ? 'Update' : 'Add'} User
+                    </Button>
+                    {editingUser && (
+                      <Button 
+                        variant="outline" 
+                        onClick={() => {
+                          setEditingUser(null);
+                          setNewUser({ email: '', password: '', name: '', role: 'editor' });
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                {users.map((user) => (
+                  <Card key={user.id}>
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex justify-between items-start mb-2">
+                        <Badge variant={user.role === 'admin' ? 'default' : 'secondary'} className="text-xs">
+                          {user.role}
+                        </Badge>
+                        <div className="flex gap-1">
+                          <Button size="sm" variant="outline" onClick={() => handleEditUser(user)}>
+                            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="destructive" 
+                            onClick={() => handleDeleteUser(user.id)}
+                            disabled={user.role === 'admin' && users.filter(u => u.role === 'admin').length === 1}
+                          >
+                            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <h3 className="font-bold text-sm sm:text-lg mb-1">{user.name}</h3>
+                      <p className="text-gray-600 text-xs sm:text-sm mb-1">{user.email}</p>
+                      <p className="text-gray-500 text-xs">Password: {user.password}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          )}
 
           <TabsContent value="messages" className="space-y-4 sm:space-y-6">
             <Card>

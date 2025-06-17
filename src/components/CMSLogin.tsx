@@ -8,32 +8,29 @@ import { useToast } from '@/hooks/use-toast';
 import { Lock, Mail } from 'lucide-react';
 
 interface CMSLoginProps {
-  onLogin: () => void;
+  onLogin: (user: any) => void;
+  users: any[];
 }
 
-const CMSLogin = ({ onLogin }: CMSLoginProps) => {
+const CMSLogin = ({ onLogin, users }: CMSLoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-
-  // Default credentials (changeable)
-  const validCredentials = {
-    email: 'dhruvarajthakuri@gmail.com',
-    password: '@shwin2059'
-  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     setTimeout(() => {
-      if (email === validCredentials.email && password === validCredentials.password) {
+      const user = users.find(u => u.email === email && u.password === password);
+      
+      if (user) {
         toast({
           title: "Login Successful",
           description: "Welcome to DevotedZen Web CMS",
         });
-        onLogin();
+        onLogin(user);
       } else {
         toast({
           title: "Login Failed",
