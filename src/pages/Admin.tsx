@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,16 +12,7 @@ import CMSLogin from '@/components/CMSLogin';
 const Admin = () => {
   const { toast } = useToast();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [portfolioItems, setPortfolioItems] = useState([
-    {
-      id: 1,
-      title: 'Sunshine Elementary School',
-      category: 'Educational',
-      image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Modern school website with student portal, event calendar, and online learning management system.',
-      tags: ['Education', 'CMS', 'Student Portal']
-    }
-  ]);
+  const [portfolioItems, setPortfolioItems] = useState([]);
 
   const [categories] = useState([
     'Educational',
@@ -69,6 +59,39 @@ const Admin = () => {
 
   const [editingPortfolio, setEditingPortfolio] = useState(null);
 
+  // Content management state
+  const [siteContent, setSiteContent] = useState({
+    companyEmail: 'contact@devotedzen.com',
+    phoneNumber: '9848923375',
+    address: 'Kohalpur -2, Manakamana Chowk, Bankle, Nepal',
+    heroTitle: 'DevotedZen Web',
+    heroDescription: 'We create stunning websites for schools, hotels, restaurants, and small businesses. Transform your digital presence with our expert web design and development services.',
+    aboutTitle: 'About DevotedZen Web',
+    aboutDescription: 'We are passionate web designers and developers dedicated to creating exceptional digital experiences for businesses of all sizes.',
+    servicesTitle: 'Our Services',
+    servicesDescription: 'We offer comprehensive web solutions tailored to your business needs.',
+    portfolioTitle: 'Our Portfolio',
+    portfolioDescription: 'Discover some of our recent projects and see how we\'ve helped businesses across different industries establish their online presence.',
+    pricingTitle: 'Website Pricing Plans',
+    pricingDescription: 'Choose the perfect plan for your business needs. Limited time 18% opening offer!',
+    contactTitle: 'Get In Touch',
+    contactDescription: 'Ready to start your project? Contact us today for a free consultation.'
+  });
+
+  useEffect(() => {
+    // Load data from localStorage
+    const savedPortfolio = localStorage.getItem('portfolioItems');
+    const savedContent = localStorage.getItem('siteContent');
+    
+    if (savedPortfolio) {
+      setPortfolioItems(JSON.parse(savedPortfolio));
+    }
+    
+    if (savedContent) {
+      setSiteContent(JSON.parse(savedContent));
+    }
+  }, []);
+
   if (!isLoggedIn) {
     return <CMSLogin onLogin={() => setIsLoggedIn(true)} />;
   }
@@ -94,9 +117,11 @@ const Admin = () => {
       const portfolio = {
         id: Date.now(),
         ...newPortfolio,
-        tags: newPortfolio.tags.split(',').map(tag => tag.trim())
+        tags: newPortfolio.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
       };
-      setPortfolioItems([...portfolioItems, portfolio]);
+      const updatedPortfolio = [...portfolioItems, portfolio];
+      setPortfolioItems(updatedPortfolio);
+      localStorage.setItem('portfolioItems', JSON.stringify(updatedPortfolio));
       setNewPortfolio({ title: '', category: '', image: '', description: '', tags: '' });
       toast({
         title: "Portfolio Added",
@@ -112,7 +137,7 @@ const Admin = () => {
       category: item.category,
       image: item.image,
       description: item.description,
-      tags: item.tags.join(', ')
+      tags: item.tags ? item.tags.join(', ') : ''
     });
   };
 
@@ -121,11 +146,13 @@ const Admin = () => {
       const updatedPortfolio = {
         ...editingPortfolio,
         ...newPortfolio,
-        tags: newPortfolio.tags.split(',').map(tag => tag.trim())
+        tags: newPortfolio.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
       };
-      setPortfolioItems(portfolioItems.map(item => 
+      const updatedItems = portfolioItems.map(item => 
         item.id === editingPortfolio.id ? updatedPortfolio : item
-      ));
+      );
+      setPortfolioItems(updatedItems);
+      localStorage.setItem('portfolioItems', JSON.stringify(updatedItems));
       setEditingPortfolio(null);
       setNewPortfolio({ title: '', category: '', image: '', description: '', tags: '' });
       toast({
@@ -136,7 +163,9 @@ const Admin = () => {
   };
 
   const handleDeletePortfolio = (id) => {
-    setPortfolioItems(portfolioItems.filter(item => item.id !== id));
+    const updatedItems = portfolioItems.filter(item => item.id !== id);
+    setPortfolioItems(updatedItems);
+    localStorage.setItem('portfolioItems', JSON.stringify(updatedItems));
     toast({
       title: "Portfolio Deleted",
       description: "Portfolio item has been deleted successfully.",
@@ -155,6 +184,14 @@ const Admin = () => {
     });
   };
 
+  const handleSaveContent = () => {
+    localStorage.setItem('siteContent', JSON.stringify(siteContent));
+    toast({
+      title: "Content Saved",
+      description: "Website content has been updated successfully.",
+    });
+  };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     toast({
@@ -164,36 +201,36 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="container mx-auto">
-        <div className="mb-8 flex justify-between items-center">
+    <div className="min-h-screen bg-gray-50 p-2 sm:p-4">
+      <div className="container mx-auto max-w-7xl">
+        <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">DevotedZen Web CMS</h1>
-            <p className="text-gray-600">Manage your website content and portfolio</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">DevotedZen Web CMS</h1>
+            <p className="text-gray-600 text-sm sm:text-base">Manage your website content and portfolio</p>
           </div>
-          <Button variant="outline" onClick={handleLogout}>
+          <Button variant="outline" onClick={handleLogout} className="self-start sm:self-auto">
             Logout
           </Button>
         </div>
 
-        <Tabs defaultValue="portfolio" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
-            <TabsTrigger value="content">Content</TabsTrigger>
-            <TabsTrigger value="messages">Messages</TabsTrigger>
-            <TabsTrigger value="quotes">Quotes</TabsTrigger>
+        <Tabs defaultValue="portfolio" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto">
+            <TabsTrigger value="portfolio" className="text-xs sm:text-sm py-2">Portfolio</TabsTrigger>
+            <TabsTrigger value="content" className="text-xs sm:text-sm py-2">Content</TabsTrigger>
+            <TabsTrigger value="messages" className="text-xs sm:text-sm py-2">Messages</TabsTrigger>
+            <TabsTrigger value="quotes" className="text-xs sm:text-sm py-2">Quotes</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="portfolio" className="space-y-6">
+          <TabsContent value="portfolio" className="space-y-4 sm:space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Plus className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <Plus className="h-4 w-4 sm:h-5 sm:w-5" />
                   {editingPortfolio ? 'Edit Portfolio Item' : 'Add New Portfolio Item'}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <Input
                     placeholder="Project Title"
                     value={newPortfolio.title}
@@ -213,7 +250,7 @@ const Admin = () => {
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Upload Image</label>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <input
                       type="file"
                       accept="image/*"
@@ -222,7 +259,7 @@ const Admin = () => {
                       id="image-upload"
                     />
                     <label htmlFor="image-upload" className="cursor-pointer">
-                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">
                         <Upload className="h-4 w-4" />
                         Upload Image
                       </div>
@@ -235,7 +272,7 @@ const Admin = () => {
                     )}
                   </div>
                   {newPortfolio.image && (
-                    <img src={newPortfolio.image} alt="Preview" className="w-32 h-24 object-cover rounded-md" />
+                    <img src={newPortfolio.image} alt="Preview" className="w-24 h-18 sm:w-32 sm:h-24 object-cover rounded-md" />
                   )}
                 </div>
                 
@@ -243,13 +280,14 @@ const Admin = () => {
                   placeholder="Project Description"
                   value={newPortfolio.description}
                   onChange={(e) => setNewPortfolio({ ...newPortfolio, description: e.target.value })}
+                  rows={3}
                 />
                 <Input
                   placeholder="Tags (comma separated)"
                   value={newPortfolio.tags}
                   onChange={(e) => setNewPortfolio({ ...newPortfolio, tags: e.target.value })}
                 />
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <Button 
                     onClick={editingPortfolio ? handleUpdatePortfolio : handleAddPortfolio}
                     className="bg-red-500 hover:bg-red-600"
@@ -271,26 +309,26 @@ const Admin = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
               {portfolioItems.map((item) => (
                 <Card key={item.id} className="overflow-hidden">
-                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
-                  <CardContent className="p-4">
+                  <img src={item.image} alt={item.title} className="w-full h-36 sm:h-48 object-cover" />
+                  <CardContent className="p-3 sm:p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <Badge variant="secondary">{item.category}</Badge>
+                      <Badge variant="secondary" className="text-xs">{item.category}</Badge>
                       <div className="flex gap-1">
                         <Button size="sm" variant="outline" onClick={() => handleEditPortfolio(item)}>
-                          <Edit className="h-4 w-4" />
+                          <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
                         </Button>
                         <Button size="sm" variant="destructive" onClick={() => handleDeletePortfolio(item.id)}>
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                         </Button>
                       </div>
                     </div>
-                    <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                    <p className="text-gray-600 text-sm mb-2">{item.description}</p>
+                    <h3 className="font-bold text-sm sm:text-lg mb-2">{item.title}</h3>
+                    <p className="text-gray-600 text-xs sm:text-sm mb-2 line-clamp-2">{item.description}</p>
                     <div className="flex flex-wrap gap-1">
-                      {item.tags.map((tag, idx) => (
+                      {item.tags && item.tags.map((tag, idx) => (
                         <Badge key={idx} variant="outline" className="text-xs">{tag}</Badge>
                       ))}
                     </div>
@@ -300,47 +338,81 @@ const Admin = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="content" className="space-y-6">
+          <TabsContent value="content" className="space-y-4 sm:space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
                   Website Content Management
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Company Email</label>
-                    <Input defaultValue="contact@devotedzen.com" />
+                    <Input 
+                      value={siteContent.companyEmail}
+                      onChange={(e) => setSiteContent({...siteContent, companyEmail: e.target.value})}
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">Phone Number</label>
-                    <Input defaultValue="9848923375" />
+                    <Input 
+                      value={siteContent.phoneNumber}
+                      onChange={(e) => setSiteContent({...siteContent, phoneNumber: e.target.value})}
+                    />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Address</label>
-                    <Textarea defaultValue="Kohalpur -2, Manakamana Chowk, Bankle, Nepal" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Hero Section Title</label>
-                    <Input defaultValue="DevotedZen Web" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Hero Section Description</label>
-                    <Textarea defaultValue="We create stunning websites for schools, hotels, restaurants, and small businesses. Transform your digital presence with our expert web design and development services." />
-                  </div>
-                  <Button className="bg-red-500 hover:bg-red-600">Save Changes</Button>
                 </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Address</label>
+                  <Textarea 
+                    value={siteContent.address}
+                    onChange={(e) => setSiteContent({...siteContent, address: e.target.value})}
+                    rows={2}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Hero Section Title</label>
+                  <Input 
+                    value={siteContent.heroTitle}
+                    onChange={(e) => setSiteContent({...siteContent, heroTitle: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Hero Section Description</label>
+                  <Textarea 
+                    value={siteContent.heroDescription}
+                    onChange={(e) => setSiteContent({...siteContent, heroDescription: e.target.value})}
+                    rows={3}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">About Section Title</label>
+                  <Input 
+                    value={siteContent.aboutTitle}
+                    onChange={(e) => setSiteContent({...siteContent, aboutTitle: e.target.value})}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">About Section Description</label>
+                  <Textarea 
+                    value={siteContent.aboutDescription}
+                    onChange={(e) => setSiteContent({...siteContent, aboutDescription: e.target.value})}
+                    rows={3}
+                  />
+                </div>
+                <Button onClick={handleSaveContent} className="bg-red-500 hover:bg-red-600">
+                  Save Changes
+                </Button>
               </CardContent>
             </Card>
           </TabsContent>
 
-          <TabsContent value="messages" className="space-y-6">
+          <TabsContent value="messages" className="space-y-4 sm:space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                   Contact Messages
                 </CardTitle>
               </CardHeader>
@@ -348,21 +420,21 @@ const Admin = () => {
                 <div className="space-y-4">
                   {messages.map((message) => (
                     <Card key={message.id}>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-2">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
                           <div>
-                            <h4 className="font-semibold">{message.name}</h4>
-                            <p className="text-sm text-gray-600">{message.email}</p>
-                            <Badge variant="outline">{message.business}</Badge>
+                            <h4 className="font-semibold text-sm sm:text-base">{message.name}</h4>
+                            <p className="text-xs sm:text-sm text-gray-600">{message.email}</p>
+                            <Badge variant="outline" className="text-xs mt-1">{message.business}</Badge>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-500">{message.date}</span>
+                            <span className="text-xs sm:text-sm text-gray-500">{message.date}</span>
                             <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(message.id, 'contact')}>
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </div>
                         </div>
-                        <p className="text-gray-700">{message.message}</p>
+                        <p className="text-gray-700 text-xs sm:text-sm">{message.message}</p>
                       </CardContent>
                     </Card>
                   ))}
@@ -371,11 +443,11 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="quotes" className="space-y-6">
+          <TabsContent value="quotes" className="space-y-4 sm:space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
                   Quote Requests
                 </CardTitle>
               </CardHeader>
@@ -383,21 +455,21 @@ const Admin = () => {
                 <div className="space-y-4">
                   {quotes.map((quote) => (
                     <Card key={quote.id}>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-2">
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
                           <div>
-                            <h4 className="font-semibold">{quote.name}</h4>
-                            <p className="text-sm text-gray-600">{quote.email}</p>
-                            <Badge variant="outline">{quote.business}</Badge>
+                            <h4 className="font-semibold text-sm sm:text-base">{quote.name}</h4>
+                            <p className="text-xs sm:text-sm text-gray-600">{quote.email}</p>
+                            <Badge variant="outline" className="text-xs mt-1">{quote.business}</Badge>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-500">{quote.date}</span>
+                            <span className="text-xs sm:text-sm text-gray-500">{quote.date}</span>
                             <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(quote.id, 'quote')}>
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                           </div>
                         </div>
-                        <p className="text-gray-700">{quote.message}</p>
+                        <p className="text-gray-700 text-xs sm:text-sm">{quote.message}</p>
                       </CardContent>
                     </Card>
                   ))}

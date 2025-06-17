@@ -27,13 +27,13 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/c237c354-fb60-431c-acd3-e1182e9cc834.png" 
               alt="DevotedZen Web Logo" 
-              className="h-10 w-auto"
+              className="h-8 w-auto sm:h-10"
             />
-            <span className="text-white font-bold text-xl hidden sm:block">DevotedZen Web</span>
+            <span className="text-white font-bold text-lg sm:text-xl hidden sm:block">DevotedZen Web</span>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <button onClick={() => handleScroll('hero')} className="text-white hover:text-red-500 transition-colors">Home</button>
             
             {/* Services Dropdown */}
@@ -47,7 +47,7 @@ const Navbar = () => {
               </button>
               {isServicesOpen && (
                 <div 
-                  className="absolute top-full left-0 mt-2 w-48 bg-black border border-gray-800 rounded-md shadow-lg"
+                  className="absolute top-full left-0 mt-2 w-48 bg-black border border-gray-800 rounded-md shadow-lg z-50"
                   onMouseEnter={() => setIsServicesOpen(true)}
                   onMouseLeave={() => setIsServicesOpen(false)}
                 >
@@ -65,7 +65,7 @@ const Navbar = () => {
             <button onClick={() => handleScroll('pricing')} className="text-white hover:text-red-500 transition-colors">Pricing</button>
             <button onClick={() => handleScroll('contact')} className="text-white hover:text-red-500 transition-colors">Contact</button>
             
-            <Button onClick={() => handleScroll('contact')} className="bg-red-500 hover:bg-red-600 text-white">
+            <Button onClick={() => handleScroll('contact')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 text-sm lg:px-6 lg:py-2 lg:text-base rounded-full">
               Get Quote
             </Button>
           </div>
@@ -90,7 +90,7 @@ const Navbar = () => {
               <button onClick={() => handleScroll('pricing')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Pricing</button>
               <button onClick={() => handleScroll('contact')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Contact</button>
               <div className="px-3 py-2">
-                <Button onClick={() => handleScroll('contact')} className="w-full bg-red-500 hover:bg-red-600 text-white">
+                <Button onClick={() => handleScroll('contact')} className="w-full bg-red-500 hover:bg-red-600 text-white rounded-full">
                   Get Quote
                 </Button>
               </div>

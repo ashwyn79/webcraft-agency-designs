@@ -1,94 +1,76 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 
 const Portfolio = () => {
-  const projects = [
-    {
-      title: 'Sunshine Elementary School',
-      category: 'Educational',
-      image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Modern school website with student portal, event calendar, and online learning management system.',
-      tags: ['Education', 'CMS', 'Student Portal']
-    },
-    {
-      title: 'Grand Palace Hotel',
-      category: 'Hospitality',
-      image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Luxury hotel website with online booking system, virtual tours, and guest management.',
-      tags: ['Booking System', 'Virtual Tours', 'Hospitality']
-    },
-    {
-      title: 'Bella Vista Restaurant',
-      category: 'Restaurant',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Elegant restaurant website with online ordering, menu management, and table reservations.',
-      tags: ['Online Ordering', 'Menu Display', 'Reservations']
-    },
-    {
-      title: 'TechStart Solutions',
-      category: 'Small Business',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Professional business website showcasing services, team, and client testimonials.',
-      tags: ['Business', 'Services', 'Portfolio']
-    },
-    {
-      title: 'Ocean View Resort',
-      category: 'Hospitality',
-      image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Resort website with booking system, activity schedules, and guest services.',
-      tags: ['Resort', 'Activities', 'Guest Services']
-    },
-    {
-      title: 'Green Valley Cafe',
-      category: 'Restaurant',
-      image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-      description: 'Cozy cafe website with online menu, delivery options, and loyalty program.',
-      tags: ['Cafe', 'Delivery', 'Loyalty Program']
+  const [portfolioItems, setPortfolioItems] = useState([]);
+
+  useEffect(() => {
+    // Load portfolio items from localStorage (simulating CMS data)
+    const savedPortfolio = localStorage.getItem('portfolioItems');
+    if (savedPortfolio) {
+      setPortfolioItems(JSON.parse(savedPortfolio));
     }
-  ];
+  }, []);
+
+  if (portfolioItems.length === 0) {
+    return (
+      <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-black">
+              Our <span className="text-red-500">Portfolio</span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Our portfolio will be displayed here once projects are added through the CMS.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+    <section id="portfolio" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-black">
             Our <span className="text-red-500">Portfolio</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
             Discover some of our recent projects and see how we've helped businesses 
             across different industries establish their online presence.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {portfolioItems.map((project, index) => (
+            <Card key={index} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg rounded-2xl">
               <div className="relative overflow-hidden">
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-48 sm:h-52 lg:h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Button size="sm" className="bg-white text-gray-900 hover:bg-gray-100">
+                  <Button size="sm" className="bg-white text-gray-900 hover:bg-gray-100 rounded-full">
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-red-500 bg-red-50 px-3 py-1 rounded-full">
+                  <span className="text-xs sm:text-sm font-medium text-red-500 bg-red-50 px-2 sm:px-3 py-1 rounded-full">
                     {project.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-black mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-black mb-2">{project.title}</h3>
+                <p className="text-gray-600 mb-4 text-sm sm:text-base">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, idx) => (
+                  {project.tags && project.tags.map((tag, idx) => (
                     <span key={idx} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
                       {tag}
                     </span>
@@ -99,12 +81,14 @@ const Portfolio = () => {
           ))}
         </div>
         
-        <div className="text-center mt-12">
-          <Button size="lg" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-8 py-3 rounded-full transition-all duration-300">
-            View All Projects
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
+        {portfolioItems.length > 0 && (
+          <div className="text-center mt-8 sm:mt-12">
+            <Button size="lg" variant="outline" className="border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-6 sm:px-8 py-3 rounded-full transition-all duration-300">
+              View All Projects
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
