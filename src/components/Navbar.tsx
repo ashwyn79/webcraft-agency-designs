@@ -15,6 +15,7 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+    setIsServicesOpen(false);
   };
 
   return (
@@ -33,7 +34,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => handleScroll('home')} className="text-white hover:text-red-500 transition-colors">Home</button>
+            <button onClick={() => handleScroll('hero')} className="text-white hover:text-red-500 transition-colors">Home</button>
             
             {/* Services Dropdown */}
             <div className="relative">
@@ -82,7 +83,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-black border-t border-gray-800">
-              <button onClick={() => handleScroll('home')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Home</button>
+              <button onClick={() => handleScroll('hero')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Home</button>
               <button onClick={() => handleScroll('services')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Services</button>
               <button onClick={() => handleScroll('portfolio')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Portfolio</button>
               <button onClick={() => handleScroll('about')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">About</button>

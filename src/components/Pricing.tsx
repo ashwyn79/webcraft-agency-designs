@@ -8,79 +8,76 @@ import { Check, Star } from 'lucide-react';
 const Pricing = () => {
   const plans = [
     {
-      name: 'Bronze',
-      price: 'Rs 12500+',
-      originalPrice: 'Rs 15244+',
-      discount: '18% cheaper',
+      name: 'Basic',
+      price: 'Rs 10,250',
+      originalPrice: 'Rs 12,500',
       stars: 1,
       color: 'bg-amber-600',
       features: [
-        'Domain Hosting',
-        'Pages (Upto 10)',
-        'Compling Content',
-        'Sitemap',
-        'Secure HTTPS',
-        'Social Media Integration',
-        'SEO',
-        'E-commerce Functionality',
-        'User Registration/Login',
-        'Responsive Design',
-        'Blogs/Note Section',
-        'Feedback Functionality',
         'Analysis Integration',
+        'Blogs/Note Section',
+        'Compling Content',
+        'Domain Hosting',
+        'Dynamic Site',
+        'E-commerce Functionality',
+        'Feedback Functionality',
+        'Pages (Upto 10)',
+        'Responsive Design',
+        'Secure HTTPS',
+        'SEO',
+        'Sitemap',
         'Smooth Rendering',
-        'Dynamic Site'
+        'Social Media Integration',
+        'User Registration/Login'
       ]
     },
     {
-      name: 'Gold',
-      price: 'Rs 100000+',
-      originalPrice: 'Rs 121951+',
-      discount: '18% cheaper',
+      name: 'Premium',
+      price: 'Rs 82,000',
+      originalPrice: 'Rs 100,000',
       stars: 3,
       color: 'bg-yellow-500',
       popular: true,
       features: [
-        'Domain Hosting',
-        'Pages (Upto 30)',
-        'Compling Content',
-        'Sitemap',
-        'Secure HTTPS',
-        'Social Media Integration',
-        'SEO',
-        'E-commerce Functionality',
-        'User Registration/Login',
-        'Responsive Design',
-        'Blogs/Note Section',
-        'Feedback Functionality',
         'Analysis Integration',
+        'Blogs/Note Section',
+        'Compling Content',
+        'Domain Hosting',
+        'Dynamic Site',
+        'E-commerce Functionality',
+        'Feedback Functionality',
+        'Pages (Upto 30)',
+        'Responsive Design',
+        'Secure HTTPS',
+        'SEO',
+        'Sitemap',
         'Smooth Rendering',
-        'Dynamic Site'
+        'Social Media Integration',
+        'User Registration/Login'
       ]
     },
     {
-      name: 'Silver',
-      price: 'Rs 45500+',
-      originalPrice: 'Rs 55488+',
-      discount: '18% cheaper',
+      name: 'Plus',
+      price: 'Rs 37,310',
+      originalPrice: 'Rs 45,500',
       stars: 2,
       color: 'bg-gray-400',
       features: [
-        'Domain Hosting',
-        'Pages (Upto 20)',
+        'Analysis Integration',
+        'Blogs/Note Section',
         'Compling Content',
-        'Sitemap',
-        'Secure HTTPS',
-        'Social Media Integration',
-        'SEO',
-        'User Registration/Login',
-        'Responsive Design',
-        'Smooth Rendering',
+        'Domain Hosting',
         'Dynamic Site',
         'E-commerce Functionality',
-        'Blogs/Note Section',
         'Feedback Functionality',
-        'Analysis Integration'
+        'Pages (Upto 20)',
+        'Responsive Design',
+        'Secure HTTPS',
+        'SEO',
+        'Sitemap',
+        'Smooth Rendering',
+        'Social Media Integration',
+        'User Registration/Login'
       ]
     }
   ];
@@ -100,16 +97,16 @@ const Pricing = () => {
             Website <span className="text-red-500">Pricing Plans</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Choose the perfect plan for your business needs. All plans include 18% discount!
+            Choose the perfect plan for your business needs. Limited time 18% opening offer!
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
-            <Card key={index} className={`relative bg-gray-900 border-2 ${plan.popular ? 'border-red-500 scale-105' : 'border-gray-700'} hover:border-red-500 transition-all duration-300`}>
+            <Card key={index} className={`relative bg-gray-900 border-2 ${plan.popular ? 'border-red-500 scale-105' : 'border-gray-700'} hover:border-red-500 transition-all duration-300 rounded-2xl`}>
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge className="bg-red-500 text-white px-4 py-1">Most Popular</Badge>
+                  <Badge className="bg-red-500 text-white px-4 py-1 rounded-full">Most Popular</Badge>
                 </div>
               )}
               
@@ -126,8 +123,8 @@ const Pricing = () => {
                 <div className="mb-4">
                   <div className="text-3xl font-bold text-white mb-1">{plan.price}</div>
                   <div className="text-sm text-gray-400 line-through">{plan.originalPrice}</div>
-                  <Badge variant="outline" className="text-green-400 border-green-400 mt-2">
-                    {plan.discount}
+                  <Badge variant="outline" className="text-green-400 border-green-400 mt-2 rounded-full">
+                    18% Opening Offer
                   </Badge>
                 </div>
               </CardHeader>
@@ -144,7 +141,7 @@ const Pricing = () => {
                 
                 <Button 
                   onClick={() => handleScroll('contact')}
-                  className="w-full bg-red-500 hover:bg-red-600 text-white mt-6"
+                  className="w-full bg-red-500 hover:bg-red-600 text-white mt-6 rounded-full"
                 >
                   Choose plan
                 </Button>
