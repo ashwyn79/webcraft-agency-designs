@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Code, Palette, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,13 +24,10 @@ const Hero = () => {
               Transform your digital presence with our expert web design and development services.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 px-4">
+            <div className="flex justify-center mb-12 px-4">
               <Button size="lg" className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full transition-all duration-300 hover:scale-105">
                 Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300">
-                View Our Work
               </Button>
             </div>
             
