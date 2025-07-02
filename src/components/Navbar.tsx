@@ -1,11 +1,10 @@
 
 import React, { useState } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -15,31 +14,12 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
-    setIsServicesOpen(false);
   };
 
-  const handleServiceClick = (serviceType: string) => {
-    // First scroll to services section
-    const element = document.getElementById('services');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    // Then highlight the specific service after a short delay
-    setTimeout(() => {
-      const serviceElement = document.querySelector(`[data-service="${serviceType}"]`);
-      if (serviceElement) {
-        serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Add a temporary highlight effect
-        serviceElement.classList.add('ring-2', 'ring-red-500', 'ring-opacity-75');
-        setTimeout(() => {
-          serviceElement.classList.remove('ring-2', 'ring-red-500', 'ring-opacity-75');
-        }, 2000);
-      }
-    }, 500);
-    
-    setIsMenuOpen(false);
-    setIsServicesOpen(false);
+  const handleStartProject = () => {
+    // For now, scroll to contact section
+    // This will be updated once Supabase is connected
+    handleScroll('contact');
   };
 
   return (
@@ -59,63 +39,14 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <button onClick={() => handleScroll('home')} className="text-white hover:text-red-500 transition-colors">Home</button>
-            
-            {/* Services Dropdown */}
-            <div className="relative">
-              <button 
-                className="text-white hover:text-red-500 transition-colors flex items-center"
-                onMouseEnter={() => setIsServicesOpen(true)}
-                onMouseLeave={() => setIsServicesOpen(false)}
-              >
-                Services <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-              {isServicesOpen && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-48 bg-black border border-gray-800 rounded-md shadow-lg z-50"
-                  onMouseEnter={() => setIsServicesOpen(true)}
-                  onMouseLeave={() => setIsServicesOpen(false)}
-                >
-                  <button 
-                    onClick={() => handleServiceClick('web-design')} 
-                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
-                  >
-                    Web Design
-                  </button>
-                  <button 
-                    onClick={() => handleServiceClick('development')} 
-                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
-                  >
-                    Development
-                  </button>
-                  <button 
-                    onClick={() => handleServiceClick('school-websites')} 
-                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
-                  >
-                    School Websites
-                  </button>
-                  <button 
-                    onClick={() => handleServiceClick('hotel-websites')} 
-                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
-                  >
-                    Hotel Websites
-                  </button>
-                  <button 
-                    onClick={() => handleServiceClick('restaurant-websites')} 
-                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
-                  >
-                    Restaurant Websites
-                  </button>
-                </div>
-              )}
-            </div>
-            
             <button onClick={() => handleScroll('portfolio')} className="text-white hover:text-red-500 transition-colors">Portfolio</button>
             <button onClick={() => handleScroll('about')} className="text-white hover:text-red-500 transition-colors">About</button>
             <button onClick={() => handleScroll('pricing')} className="text-white hover:text-red-500 transition-colors">Pricing</button>
+            <button onClick={() => handleScroll('testimonials')} className="text-white hover:text-red-500 transition-colors">Testimonials</button>
             <button onClick={() => handleScroll('contact')} className="text-white hover:text-red-500 transition-colors">Contact</button>
             
-            <Button onClick={() => handleScroll('contact')} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 text-sm lg:px-6 lg:py-2 lg:text-base rounded-full">
-              Get Quote
+            <Button onClick={handleStartProject} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 text-sm lg:px-6 lg:py-2 lg:text-base rounded-full">
+              Start Your Project
             </Button>
           </div>
 
@@ -133,14 +64,14 @@ const Navbar = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-black border-t border-gray-800">
               <button onClick={() => handleScroll('home')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Home</button>
-              <button onClick={() => handleScroll('services')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Services</button>
               <button onClick={() => handleScroll('portfolio')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Portfolio</button>
               <button onClick={() => handleScroll('about')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">About</button>
               <button onClick={() => handleScroll('pricing')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Pricing</button>
+              <button onClick={() => handleScroll('testimonials')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Testimonials</button>
               <button onClick={() => handleScroll('contact')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Contact</button>
               <div className="px-3 py-2">
-                <Button onClick={() => handleScroll('contact')} className="w-full bg-red-500 hover:bg-red-600 text-white rounded-full">
-                  Get Quote
+                <Button onClick={handleStartProject} className="w-full bg-red-500 hover:bg-red-600 text-white rounded-full">
+                  Start Your Project
                 </Button>
               </div>
             </div>
