@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Plus, Edit, Trash2, MessageCircle, FileText, Upload, Image as ImageIcon, Users, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import CMSLogin from '@/components/CMSLogin';
+import { supabase } from '@/integrations/supabase/client';
 
 const Admin = () => {
   const { toast } = useToast();
@@ -15,6 +16,8 @@ const Admin = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [contactMessages, setContactMessages] = useState([]);
+  const [projectRequests, setProjectRequests] = useState([]);
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -105,7 +108,7 @@ const Admin = () => {
   });
 
   useEffect(() => {
-    // Load data from localStorage
+    // Load data from localStorage and Supabase
     const savedPortfolio = localStorage.getItem('portfolioItems');
     const savedContent = localStorage.getItem('siteContent');
     const savedUsers = localStorage.getItem('cmsUsers');
@@ -126,7 +129,48 @@ const Admin = () => {
     if (savedTestimonials) {
       setTestimonials(JSON.parse(savedTestimonials));
     }
-  }, []);
+
+    // Fetch data from Supabase when logged in
+    if (isLoggedIn) {
+      fetchSupabaseData();
+    }
+  }, [isLoggedIn]);
+
+  const fetchSupabaseData = async () => {
+    try {
+      // Fetch contact messages (admin access only)
+      const { data: messages } = await supabase
+        .from('contact_messages')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (messages) {
+        setContactMessages(messages);
+      }
+
+      // Fetch project requests (admin access only)
+      const { data: requests } = await supabase
+        .from('project_requests')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (requests) {
+        setProjectRequests(requests);
+      }
+
+      // Fetch all testimonials (including unapproved ones for admin)
+      const { data: allTestimonials } = await supabase
+        .from('testimonials')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (allTestimonials) {
+        setTestimonials(allTestimonials);
+      }
+    } catch (error) {
+      console.error('Error fetching data from Supabase:', error);
+    }
+  };
 
   if (!isLoggedIn) {
     return <CMSLogin onLogin={(user) => {
@@ -349,16 +393,70 @@ const Admin = () => {
     });
   };
 
-  const handleDeleteMessage = (id, type) => {
-    if (type === 'contact') {
-      setMessages(messages.filter(msg => msg.id !== id));
-    } else {
-      setQuotes(quotes.filter(quote => quote.id !== id));
+  const handleApproveTestimonial = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('testimonials')
+        .update({ is_approved: true })
+        .eq('id', id);
+
+      if (error) throw error;
+
+      // Update local state
+      setTestimonials(prev => 
+        prev.map(testimonial => 
+          testimonial.id === id 
+            ? { ...testimonial, is_approved: true }
+            : testimonial
+        )
+      );
+
+      toast({
+        title: "Testimonial Approved",
+        description: "The testimonial is now visible on the website.",
+      });
+    } catch (error) {
+      console.error('Error approving testimonial:', error);
+      toast({
+        title: "Error",
+        description: "Failed to approve testimonial.",
+        variant: "destructive",
+      });
     }
-    toast({
-      title: "Message Deleted",
-      description: "Message has been deleted successfully.",
-    });
+  };
+
+  const handleDeleteMessage = async (id: string, type: 'contact' | 'project') => {
+    try {
+      if (type === 'contact') {
+        const { error } = await supabase
+          .from('contact_messages')
+          .delete()
+          .eq('id', id);
+        
+        if (error) throw error;
+        setContactMessages(prev => prev.filter(msg => msg.id !== id));
+      } else {
+        const { error } = await supabase
+          .from('project_requests')
+          .delete()
+          .eq('id', id);
+        
+        if (error) throw error;
+        setProjectRequests(prev => prev.filter(req => req.id !== id));
+      }
+
+      toast({
+        title: "Message Deleted",
+        description: "Message has been deleted successfully.",
+      });
+    } catch (error) {
+      console.error('Error deleting message:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete message.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleSaveContent = () => {
@@ -393,17 +491,228 @@ const Admin = () => {
           </Button>
         </div>
 
-        <Tabs defaultValue="portfolio" className="space-y-4 sm:space-y-6">
+        <Tabs defaultValue="messages" className="space-y-4 sm:space-y-6">
           <TabsList className="grid w-full grid-cols-3 sm:grid-cols-6 h-auto">
+            <TabsTrigger value="messages" className="text-xs sm:text-sm py-2">Messages</TabsTrigger>
+            <TabsTrigger value="projects" className="text-xs sm:text-sm py-2">Projects</TabsTrigger>
+            <TabsTrigger value="testimonials" className="text-xs sm:text-sm py-2">Reviews</TabsTrigger>
             <TabsTrigger value="portfolio" className="text-xs sm:text-sm py-2">Portfolio</TabsTrigger>
             <TabsTrigger value="content" className="text-xs sm:text-sm py-2">Content</TabsTrigger>
-            <TabsTrigger value="testimonials" className="text-xs sm:text-sm py-2">Testimonials</TabsTrigger>
             {currentUser?.role === 'admin' && (
               <TabsTrigger value="users" className="text-xs sm:text-sm py-2">Users</TabsTrigger>
             )}
-            <TabsTrigger value="messages" className="text-xs sm:text-sm py-2">Messages</TabsTrigger>
-            <TabsTrigger value="quotes" className="text-xs sm:text-sm py-2">Quotes</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="messages" className="space-y-4 sm:space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Contact Messages ({contactMessages.length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {contactMessages.map((message) => (
+                    <Card key={message.id}>
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
+                          <div>
+                            <h4 className="font-semibold text-sm sm:text-base">{message.name}</h4>
+                            <p className="text-xs sm:text-sm text-gray-600">{message.email}</p>
+                            {message.business && (
+                              <Badge variant="outline" className="text-xs mt-1">{message.business}</Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs sm:text-sm text-gray-500">
+                              {new Date(message.created_at).toLocaleDateString()}
+                            </span>
+                            <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(message.id, 'contact')}>
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                        <p className="text-gray-700 text-xs sm:text-sm">{message.message}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                  {contactMessages.length === 0 && (
+                    <p className="text-center text-gray-500 py-8">No contact messages yet.</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="projects" className="space-y-4 sm:space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Project Requests ({projectRequests.length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {projectRequests.map((request) => (
+                    <Card key={request.id}>
+                      <CardContent className="p-3 sm:p-4">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                          <div>
+                            <h4 className="font-semibold text-sm sm:text-base">{request.name}</h4>
+                            <p className="text-xs sm:text-sm text-gray-600">{request.email}</p>
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              <Badge variant="outline" className="text-xs">{request.business_type}</Badge>
+                              <Badge variant="outline" className="text-xs">{request.website_type}</Badge>
+                              <Badge variant="outline" className="text-xs">{request.budget_range}</Badge>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs sm:text-sm text-gray-500">
+                              {new Date(request.created_at).toLocaleDateString()}
+                            </span>
+                            <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(request.id, 'project')}>
+                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-xs sm:text-sm"><strong>Timeline:</strong> {request.timeline}</p>
+                          {request.features && request.features.length > 0 && (
+                            <p className="text-xs sm:text-sm"><strong>Features:</strong> {request.features.join(', ')}</p>
+                          )}
+                          {request.description && (
+                            <p className="text-xs sm:text-sm"><strong>Description:</strong> {request.description}</p>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                  {projectRequests.length === 0 && (
+                    <p className="text-center text-gray-500 py-8">No project requests yet.</p>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="testimonials" className="space-y-4 sm:space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <Star className="h-4 w-4 sm:h-5 sm:w-5" />
+                  {editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <Input
+                    placeholder="Client Name"
+                    value={newTestimonial.name}
+                    onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
+                  />
+                  <Input
+                    placeholder="Position in Company"
+                    value={newTestimonial.position}
+                    onChange={(e) => setNewTestimonial({ ...newTestimonial, position: e.target.value })}
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Upload Profile Picture</label>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleProfilePictureUpload}
+                      className="hidden"
+                      id="profile-upload"
+                    />
+                    <label htmlFor="profile-upload" className="cursor-pointer">
+                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">
+                        <Upload className="h-4 w-4" />
+                        Upload Profile Picture
+                      </div>
+                    </label>
+                    {newTestimonial.profilePicture && (
+                      <div className="flex items-center gap-2">
+                        <ImageIcon className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-green-500">Profile picture uploaded</span>
+                      </div>
+                    )}
+                  </div>
+                  {newTestimonial.profilePicture && (
+                    <img src={newTestimonial.profilePicture} alt="Profile Preview" className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full" />
+                  )}
+                </div>
+                
+                <Textarea
+                  placeholder="Client Testimonial"
+                  value={newTestimonial.testimonial}
+                  onChange={(e) => setNewTestimonial({ ...newTestimonial, testimonial: e.target.value })}
+                  rows={4}
+                />
+                
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button 
+                    onClick={editingTestimonial ? handleUpdateTestimonial : handleAddTestimonial}
+                    className="bg-red-500 hover:bg-red-600"
+                  >
+                    {editingTestimonial ? 'Update' : 'Add'} Testimonial
+                  </Button>
+                  {editingTestimonial && (
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setEditingTestimonial(null);
+                        setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+              {testimonials.map((testimonial) => (
+                <Card key={testimonial.id} className="overflow-hidden">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-2">
+                        {testimonial.profile_picture && (
+                          <img src={testimonial.profile_picture} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
+                        )}
+                        <div>
+                          <h4 className="font-semibold text-sm">{testimonial.name}</h4>
+                          <p className="text-xs text-gray-600">{testimonial.position}</p>
+                          <Badge variant={testimonial.is_approved ? "default" : "secondary"} className="text-xs mt-1">
+                            {testimonial.is_approved ? "Approved" : "Pending"}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="flex gap-1">
+                        {!testimonial.is_approved && (
+                          <Button size="sm" variant="outline" onClick={() => handleApproveTestimonial(testimonial.id)}>
+                            Approve
+                          </Button>
+                        )}
+                        <Button size="sm" variant="outline" onClick={() => handleEditTestimonial(testimonial)}>
+                          <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                        <Button size="sm" variant="destructive" onClick={() => handleDeleteTestimonial(testimonial.id)}>
+                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    <p className="text-gray-700 text-xs sm:text-sm italic">"{testimonial.testimonial}"</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
 
           <TabsContent value="portfolio" className="space-y-4 sm:space-y-6">
             <Card>
@@ -592,115 +901,6 @@ const Admin = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="testimonials" className="space-y-4 sm:space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <Star className="h-4 w-4 sm:h-5 sm:w-5" />
-                  {editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Client Name"
-                    value={newTestimonial.name}
-                    onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
-                  />
-                  <Input
-                    placeholder="Position in Company"
-                    value={newTestimonial.position}
-                    onChange={(e) => setNewTestimonial({ ...newTestimonial, position: e.target.value })}
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Upload Profile Picture</label>
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleProfilePictureUpload}
-                      className="hidden"
-                      id="profile-upload"
-                    />
-                    <label htmlFor="profile-upload" className="cursor-pointer">
-                      <div className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">
-                        <Upload className="h-4 w-4" />
-                        Upload Profile Picture
-                      </div>
-                    </label>
-                    {newTestimonial.profilePicture && (
-                      <div className="flex items-center gap-2">
-                        <ImageIcon className="h-4 w-4 text-green-500" />
-                        <span className="text-sm text-green-500">Profile picture uploaded</span>
-                      </div>
-                    )}
-                  </div>
-                  {newTestimonial.profilePicture && (
-                    <img src={newTestimonial.profilePicture} alt="Profile Preview" className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full" />
-                  )}
-                </div>
-                
-                <Textarea
-                  placeholder="Client Testimonial"
-                  value={newTestimonial.testimonial}
-                  onChange={(e) => setNewTestimonial({ ...newTestimonial, testimonial: e.target.value })}
-                  rows={4}
-                />
-                
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <Button 
-                    onClick={editingTestimonial ? handleUpdateTestimonial : handleAddTestimonial}
-                    className="bg-red-500 hover:bg-red-600"
-                  >
-                    {editingTestimonial ? 'Update' : 'Add'} Testimonial
-                  </Button>
-                  {editingTestimonial && (
-                    <Button 
-                      variant="outline" 
-                      onClick={() => {
-                        setEditingTestimonial(null);
-                        setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-              {testimonials.map((testimonial) => (
-                <Card key={testimonial.id} className="overflow-hidden">
-                  <CardContent className="p-3 sm:p-4">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center gap-2">
-                        {testimonial.profilePicture && (
-                          <img src={testimonial.profilePicture} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
-                        )}
-                        <div>
-                          <h4 className="font-semibold text-sm">{testimonial.name}</h4>
-                          <p className="text-xs text-gray-600">{testimonial.position}</p>
-                        </div>
-                      </div>
-                      <div className="flex gap-1">
-                        <Button size="sm" variant="outline" onClick={() => handleEditTestimonial(testimonial)}>
-                          <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
-                        </Button>
-                        <Button size="sm" variant="destructive" onClick={() => handleDeleteTestimonial(testimonial.id)}>
-                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                    <p className="text-gray-700 text-xs sm:text-sm italic">"{testimonial.testimonial}"</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
           {currentUser?.role === 'admin' && (
             <TabsContent value="users" className="space-y-4 sm:space-y-6">
               <Card>
@@ -794,76 +994,6 @@ const Admin = () => {
               </div>
             </TabsContent>
           )}
-
-          <TabsContent value="messages" className="space-y-4 sm:space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-                  Contact Messages
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {messages.map((message) => (
-                    <Card key={message.id}>
-                      <CardContent className="p-3 sm:p-4">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
-                          <div>
-                            <h4 className="font-semibold text-sm sm:text-base">{message.name}</h4>
-                            <p className="text-xs sm:text-sm text-gray-600">{message.email}</p>
-                            <Badge variant="outline" className="text-xs mt-1">{message.business}</Badge>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm text-gray-500">{message.date}</span>
-                            <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(message.id, 'contact')}>
-                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        <p className="text-gray-700 text-xs sm:text-sm">{message.message}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="quotes" className="space-y-4 sm:space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
-                  Quote Requests
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {quotes.map((quote) => (
-                    <Card key={quote.id}>
-                      <CardContent className="p-3 sm:p-4">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2 gap-2">
-                          <div>
-                            <h4 className="font-semibold text-sm sm:text-base">{quote.name}</h4>
-                            <p className="text-xs sm:text-sm text-gray-600">{quote.email}</p>
-                            <Badge variant="outline" className="text-xs mt-1">{quote.business}</Badge>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs sm:text-sm text-gray-500">{quote.date}</span>
-                            <Button size="sm" variant="destructive" onClick={() => handleDeleteMessage(quote.id, 'quote')}>
-                              <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                            </Button>
-                          </div>
-                        </div>
-                        <p className="text-gray-700 text-xs sm:text-sm">{quote.message}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
         </Tabs>
       </div>
     </div>

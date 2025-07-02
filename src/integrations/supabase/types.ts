@@ -9,7 +9,126 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      contact_messages: {
+        Row: {
+          business: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+        }
+        Insert: {
+          business?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+        }
+        Update: {
+          business?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      project_requests: {
+        Row: {
+          additional_requirements: string | null
+          budget_range: string
+          business_name: string | null
+          business_type: string
+          created_at: string
+          description: string | null
+          email: string
+          features: string[] | null
+          has_content: boolean | null
+          has_logo: boolean | null
+          id: string
+          name: string
+          phone: string | null
+          timeline: string
+          website_type: string
+        }
+        Insert: {
+          additional_requirements?: string | null
+          budget_range: string
+          business_name?: string | null
+          business_type: string
+          created_at?: string
+          description?: string | null
+          email: string
+          features?: string[] | null
+          has_content?: boolean | null
+          has_logo?: boolean | null
+          id?: string
+          name: string
+          phone?: string | null
+          timeline: string
+          website_type: string
+        }
+        Update: {
+          additional_requirements?: string | null
+          budget_range?: string
+          business_name?: string | null
+          business_type?: string
+          created_at?: string
+          description?: string | null
+          email?: string
+          features?: string[] | null
+          has_content?: boolean | null
+          has_logo?: boolean | null
+          id?: string
+          name?: string
+          phone?: string | null
+          timeline?: string
+          website_type?: string
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          business: string | null
+          created_at: string
+          email: string | null
+          id: string
+          is_approved: boolean | null
+          name: string
+          position: string | null
+          profile_picture: string | null
+          rating: number | null
+          testimonial: string
+        }
+        Insert: {
+          business?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_approved?: boolean | null
+          name: string
+          position?: string | null
+          profile_picture?: string | null
+          rating?: number | null
+          testimonial: string
+        }
+        Update: {
+          business?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          is_approved?: boolean | null
+          name?: string
+          position?: string | null
+          profile_picture?: string | null
+          rating?: number | null
+          testimonial?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
