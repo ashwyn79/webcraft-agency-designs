@@ -18,6 +18,30 @@ const Navbar = () => {
     setIsServicesOpen(false);
   };
 
+  const handleServiceClick = (serviceType: string) => {
+    // First scroll to services section
+    const element = document.getElementById('services');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Then highlight the specific service after a short delay
+    setTimeout(() => {
+      const serviceElement = document.querySelector(`[data-service="${serviceType}"]`);
+      if (serviceElement) {
+        serviceElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add a temporary highlight effect
+        serviceElement.classList.add('ring-2', 'ring-red-500', 'ring-opacity-75');
+        setTimeout(() => {
+          serviceElement.classList.remove('ring-2', 'ring-red-500', 'ring-opacity-75');
+        }, 2000);
+      }
+    }, 500);
+    
+    setIsMenuOpen(false);
+    setIsServicesOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800">
       <div className="container mx-auto px-4">
@@ -51,11 +75,36 @@ const Navbar = () => {
                   onMouseEnter={() => setIsServicesOpen(true)}
                   onMouseLeave={() => setIsServicesOpen(false)}
                 >
-                  <button onClick={() => handleScroll('services')} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500">Web Design</button>
-                  <button onClick={() => handleScroll('services')} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500">Development</button>
-                  <button onClick={() => handleScroll('services')} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500">School Websites</button>
-                  <button onClick={() => handleScroll('services')} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500">Hotel Websites</button>
-                  <button onClick={() => handleScroll('services')} className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500">Restaurant Websites</button>
+                  <button 
+                    onClick={() => handleServiceClick('web-design')} 
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
+                  >
+                    Web Design
+                  </button>
+                  <button 
+                    onClick={() => handleServiceClick('development')} 
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
+                  >
+                    Development
+                  </button>
+                  <button 
+                    onClick={() => handleServiceClick('school-websites')} 
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
+                  >
+                    School Websites
+                  </button>
+                  <button 
+                    onClick={() => handleServiceClick('hotel-websites')} 
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
+                  >
+                    Hotel Websites
+                  </button>
+                  <button 
+                    onClick={() => handleServiceClick('restaurant-websites')} 
+                    className="block w-full text-left px-4 py-2 text-white hover:bg-gray-800 hover:text-red-500 transition-colors"
+                  >
+                    Restaurant Websites
+                  </button>
                 </div>
               )}
             </div>
