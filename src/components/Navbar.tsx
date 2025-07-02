@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ProjectRequestForm from './ProjectRequestForm';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -85,10 +86,7 @@ const Navbar = () => {
       {showProjectForm && (
         <div className="fixed inset-0 z-50 bg-white">
           <div className="h-full overflow-y-auto">
-            {React.createElement(
-              require('./ProjectRequestForm').default || (() => <div>Loading...</div>), 
-              { onBack: () => setShowProjectForm(false) }
-            )}
+            <ProjectRequestForm onBack={() => setShowProjectForm(false)} />
           </div>
         </div>
       )}
