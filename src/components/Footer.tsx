@@ -20,10 +20,14 @@ const Footer = () => {
                 <span className="text-red-500">Web</span>
               </h3>
             </div>
-            <p className="text-gray-400 mb-6 max-w-md">
+            <p className="text-gray-400 mb-4 max-w-md">
               Creating stunning websites for schools, hotels, restaurants, and small businesses. 
               Transform your digital presence with our expert web design and development services.
             </p>
+            <div className="text-gray-400 mb-6">
+              <p className="font-medium text-white mb-1">Address:</p>
+              <p>Birendranagar-10, Surkhet</p>
+            </div>
             <div className="flex gap-4">
               <div className="flex items-center gap-2 text-sm text-gray-400">
                 <Code className="h-4 w-4 text-red-500" />
