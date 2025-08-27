@@ -8,9 +8,9 @@ import { Check, Star } from 'lucide-react';
 const Pricing = () => {
   const plans = [
     {
-      name: 'Basic',
-      price: 'Rs 10,250',
-      originalPrice: 'Rs 12,500',
+      name: 'Silver',
+      price: 'Rs 17,000',
+      originalPrice: 'Rs 21,000',
       stars: 1,
       color: 'bg-amber-600',
       features: [
@@ -32,9 +32,9 @@ const Pricing = () => {
       ]
     },
     {
-      name: 'Premium',
-      price: 'Rs 82,000',
-      originalPrice: 'Rs 100,000',
+      name: 'Diamond',
+      price: 'Rs 45,000',
+      originalPrice: 'Rs 55,000',
       stars: 3,
       color: 'bg-yellow-500',
       popular: true,
@@ -57,9 +57,9 @@ const Pricing = () => {
       ]
     },
     {
-      name: 'Plus',
-      price: 'Rs 37,310',
-      originalPrice: 'Rs 45,500',
+      name: 'Gold',
+      price: 'Rs 28,000',
+      originalPrice: 'Rs 34,000',
       stars: 2,
       color: 'bg-gray-400',
       features: [
