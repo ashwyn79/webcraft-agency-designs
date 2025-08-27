@@ -26,6 +26,7 @@ const Footer = () => {
             </p>
             <div className="text-gray-400 mb-6">
               <p className="font-medium text-white mb-1">Address:</p>
+              <p>Kohalpur-2, Banke</p>
               <p>Birendranagar-10, Surkhet</p>
             </div>
             <div className="flex gap-4">

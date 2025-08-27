@@ -113,7 +113,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">Visit Us</h3>
-                    <p className="text-gray-600">Kohalpur -2, Manakamana Chowk<br />Bankle, Nepal</p>
+                    <div className="text-gray-600">
+                      <p>Kohalpur-2, Banke</p>
+                      <p>Birendranagar-10, Surkhet</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
