@@ -80,9 +80,12 @@ const Admin = () => {
 
   const [newTestimonial, setNewTestimonial] = useState({
     name: '',
+    email: '',
     position: '',
+    business: '',
     testimonial: '',
-    profilePicture: ''
+    profilePicture: '',
+    rating: 5
   });
 
   const [editingPortfolio, setEditingPortfolio] = useState(null);
@@ -285,7 +288,7 @@ const Admin = () => {
       const updatedTestimonials = [...testimonials, testimonial];
       setTestimonials(updatedTestimonials);
       localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
-      setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+      setNewTestimonial({ name: '', email: '', position: '', business: '', testimonial: '', profilePicture: '', rating: 5 });
       toast({
         title: "Testimonial Added",
         description: "New testimonial has been added successfully.",
@@ -297,9 +300,12 @@ const Admin = () => {
     setEditingTestimonial(testimonial);
     setNewTestimonial({
       name: testimonial.name,
+      email: testimonial.email || '',
       position: testimonial.position,
+      business: testimonial.business || '',
       testimonial: testimonial.testimonial,
-      profilePicture: testimonial.profilePicture
+      profilePicture: testimonial.profile_picture || '',
+      rating: testimonial.rating || 5
     });
   };
 
@@ -315,7 +321,7 @@ const Admin = () => {
       setTestimonials(updatedTestimonials);
       localStorage.setItem('testimonials', JSON.stringify(updatedTestimonials));
       setEditingTestimonial(null);
-      setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+      setNewTestimonial({ name: '', email: '', position: '', business: '', testimonial: '', profilePicture: '', rating: 5 });
       toast({
         title: "Testimonial Updated",
         description: "Testimonial has been updated successfully.",
@@ -602,21 +608,52 @@ const Admin = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                   <Star className="h-4 w-4 sm:h-5 sm:w-5" />
-                  {editingTestimonial ? 'Edit Testimonial' : 'Add New Testimonial'}
+                  {editingTestimonial ? 'Edit Customer Testimonial' : 'Upload Customer Testimonial'}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                   <Input
-                    placeholder="Client Name"
+                    placeholder="Customer Name"
                     value={newTestimonial.name}
                     onChange={(e) => setNewTestimonial({ ...newTestimonial, name: e.target.value })}
                   />
                   <Input
-                    placeholder="Position in Company"
+                    placeholder="Customer Email"
+                    type="email"
+                    value={newTestimonial.email || ''}
+                    onChange={(e) => setNewTestimonial({ ...newTestimonial, email: e.target.value })}
+                  />
+                  <Input
+                    placeholder="Position/Business"
                     value={newTestimonial.position}
                     onChange={(e) => setNewTestimonial({ ...newTestimonial, position: e.target.value })}
                   />
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Rating (1-5 stars)</label>
+                    <select
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      value={newTestimonial.rating || 5}
+                      onChange={(e) => setNewTestimonial({ ...newTestimonial, rating: parseInt(e.target.value) })}
+                    >
+                      <option value={5}>5 Stars</option>
+                      <option value={4}>4 Stars</option>
+                      <option value={3}>3 Stars</option>
+                      <option value={2}>2 Stars</option>
+                      <option value={1}>1 Star</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Business Name (Optional)</label>
+                    <Input
+                      placeholder="Business/Company Name"
+                      value={newTestimonial.business || ''}
+                      onChange={(e) => setNewTestimonial({ ...newTestimonial, business: e.target.value })}
+                    />
+                  </div>
                 </div>
                 
                 <div className="space-y-2">
@@ -666,7 +703,7 @@ const Admin = () => {
                       variant="outline" 
                       onClick={() => {
                         setEditingTestimonial(null);
-                        setNewTestimonial({ name: '', position: '', testimonial: '', profilePicture: '' });
+                        setNewTestimonial({ name: '', email: '', position: '', business: '', testimonial: '', profilePicture: '', rating: 5 });
                       }}
                     >
                       Cancel

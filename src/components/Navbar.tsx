@@ -41,6 +41,7 @@ const Navbar = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
               <button onClick={() => handleScroll('home')} className="text-white hover:text-red-500 transition-colors">Home</button>
+              <button onClick={() => handleScroll('services')} className="text-white hover:text-red-500 transition-colors">Services</button>
               <button onClick={() => handleScroll('portfolio')} className="text-white hover:text-red-500 transition-colors">Portfolio</button>
               <button onClick={() => handleScroll('about')} className="text-white hover:text-red-500 transition-colors">About</button>
               <button onClick={() => handleScroll('pricing')} className="text-white hover:text-red-500 transition-colors">Pricing</button>
@@ -66,6 +67,7 @@ const Navbar = () => {
             <div className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-black border-t border-gray-800">
                 <button onClick={() => handleScroll('home')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Home</button>
+                <button onClick={() => handleScroll('services')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Services</button>
                 <button onClick={() => handleScroll('portfolio')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Portfolio</button>
                 <button onClick={() => handleScroll('about')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">About</button>
                 <button onClick={() => handleScroll('pricing')} className="block w-full text-left px-3 py-2 text-white hover:text-red-500">Pricing</button>
