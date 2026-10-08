@@ -1,0 +1,9 @@
+{
+  "name": "devotedzen-labs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DevotedZen Labs - Official Website",
+  "scripts": {
+    "build": "echo 'Static assets ready for deployment'"
+  }
+}
