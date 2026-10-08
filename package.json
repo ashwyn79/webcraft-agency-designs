@@ -4,6 +4,6 @@
   "private": true,
   "description": "DevotedZen Labs - Official Website",
   "scripts": {
-    "build": "echo 'Static assets ready for deployment'"
+    "build": "mkdir -p dist && cp -r index.html about.html contact.html assets css js products dist/"
   }
 }

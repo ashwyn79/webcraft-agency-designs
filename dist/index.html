@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevotedZen Labs | Frontier AI Perception & Intelligence</title>
+  <meta name="description" content="DevotedZen Labs engineers frontier AI systems: SadakDrishti for automated road infrastructure vision, autonomous AI Cyber Threat Intelligence, and camera-first AI Fitness Tracking. Based in Maitidevi, Kathmandu, Nepal.">
+  <meta name="keywords" content="DevotedZen Labs, DevotedZen, SadakDrishti, AI Road Inspection, Cyber Threat Intelligence, AI Fitness Tracker, Computer Vision, Edge AI, Kathmandu Nepal">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
+  
+  <!-- Typography: Manrope (Headings) | Inter (Body) | JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo" aria-label="DevotedZen Labs Homepage">
+          <img src="assets/logo-icon.svg" alt="DevotedZen Labs Icon" class="brand-img-icon" width="40" height="40">
+          <div>
+            <div class="brand-name">Devoted<span>Zen</span></div>
+            <div class="brand-badge">Labs</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li class="nav-dropdown-wrapper">
+              <a href="#systems" class="nav-link">
+                Products
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </a>
+              <div class="nav-dropdown">
+                <a href="products/sadak-drishti.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon sadak">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19L8 5m8 14l4-14M12 5v14"/></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">SadakDrishti (सड़क दृष्टि)</div>
+                    <div class="dropdown-item-desc">AI Road Inspection & ASTM D6433 PCI</div>
+                  </div>
+                </a>
+                <a href="products/cyber-threat-intelligence.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon cyber">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">AI Cyber Threat Intel</div>
+                    <div class="dropdown-item-desc">Predictive SOC Defense & Dark Web Feed</div>
+                  </div>
+                </a>
+                <a href="products/ai-fitness-tracker.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon fitness">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">AI Fitness Tracker</div>
+                    <div class="dropdown-item-desc">33-Point Pose Estimation & Kinematics</div>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li><a href="#pipeline" class="nav-link">How It Works</a></li>
+            <li><a href="#architecture" class="nav-link">Architecture</a></li>
+            <li><a href="#calculator" class="nav-link">ROI Calculator</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-primary btn-sm open-demo-modal" data-product="All Systems">Schedule Briefing</button>
+          <button class="mobile-toggle" aria-label="Toggle Mobile Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="products/sadak-drishti.html" class="mobile-nav-link">SadakDrishti (Road AI)</a>
+    <a href="products/cyber-threat-intelligence.html" class="mobile-nav-link">AI Cyber Threat Intel</a>
+    <a href="products/ai-fitness-tracker.html" class="mobile-nav-link">AI Fitness Tracker</a>
+    <a href="#pipeline" class="mobile-nav-link">How It Works</a>
+    <a href="#architecture" class="mobile-nav-link">Neural Architecture</a>
+    <a href="about.html" class="mobile-nav-link">About DevotedZen</a>
+    <a href="contact.html" class="mobile-nav-link">Contact & Inquiries</a>
+    <button class="btn btn-primary open-demo-modal" style="margin-top: 1rem;">Schedule Technical Briefing</button>
+  </div>
+
+  <!-- Hero Section with Ambient Neural Vector Canvas -->
+  <section class="hero">
+    <canvas id="hero-canvas" class="hero-canvas-bg"></canvas>
+
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="section-tag zen">
+          <span style="width: 6px; height: 6px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+          AUTONOMOUS PERCEPTION AT THE EDGE
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        Perception. Prediction.<br>
+        <span class="text-gradient-zen">Frontier AI for the Real World.</span>
+      </h1>
+
+      <p class="hero-description">
+        <strong>DevotedZen Labs</strong> engineers neural intelligence that safeguards national road networks, predicts enterprise cyber attacks, and coaches human movement in real-time.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#systems" class="btn btn-primary btn-lg">Explore Neural Systems</a>
+        <button class="btn btn-outline btn-lg open-demo-modal" data-product="All Systems">Request Technical Briefing</button>
+      </div>
+
+      <!-- Live Telemetry Ribbon -->
+      <div class="hero-telemetry-ribbon">
+        <div class="telemetry-item">
+          <div class="telemetry-val counter-animate" data-target="99.4" data-suffix="%" data-float="true">99.4%</div>
+          <div class="telemetry-label">Perception Precision</div>
+        </div>
+        <div class="telemetry-item">
+          <div class="telemetry-val counter-animate" data-prefix="<" data-target="16" data-suffix="ms">16ms</div>
+          <div class="telemetry-label">Edge Inference Latency</div>
+        </div>
+        <div class="telemetry-item">
+          <div class="telemetry-val counter-animate" data-target="1.4" data-suffix="M+" data-float="true">1.4M+</div>
+          <div class="telemetry-label">Road KM Mapped</div>
+        </div>
+        <div class="telemetry-item">
+          <div class="telemetry-val counter-animate" data-target="48" data-suffix="k+">48k+</div>
+          <div class="telemetry-label">Threats Neutralized</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Split: The Crisis vs The DevotedZen Paradigm -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header text-left" style="max-width: 820px; margin-bottom: 3.5rem;">
+        <span class="section-tag zen">The Foundation</span>
+        <h2 class="section-title">Why We Build at the Convergence of Physical & Digital Worlds</h2>
+        <p class="section-desc">Legacy monitoring relies on slow human patrols and noisy cloud aggregators. DevotedZen shifts intelligence directly to the edge sensor.</p>
+      </div>
+
+      <div class="narrative-split">
+        <!-- Friction Column -->
+        <div class="narrative-column problem-col">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #ef4444; font-weight: 700; letter-spacing: 0.08em;">THE STATUS QUO FRICTION</span>
+          <h3 style="font-size: 1.75rem; margin-top: 0.75rem;">Lagging Perception Causes Catastrophic Failure</h3>
+          
+          <div class="narrative-item">
+            <h4>Decaying Road Infrastructure</h4>
+            <p>Manual road surveys take 6 to 9 months per cycle. Unflagged potholes cause thousands of fatal accidents and billions in vehicle damage before public works even detect them.</p>
+          </div>
+
+          <div class="narrative-item">
+            <h4>Noisy Cyber Security Blindspots</h4>
+            <p>Enterprise SOCs drown in 15,000+ daily alerts. Critical zero-day exploits slip through the cracks while attackers harvest credentials on dark web forums unnoticed.</p>
+          </div>
+
+          <div class="narrative-item">
+            <h4>Inaccurate Fitness Wearables</h4>
+            <p>Wrist gadgets only measure basic acceleration. They cannot see joint flexion, spinal alignment, or dangerous form breakdown during heavy athletic repetitions.</p>
+          </div>
+        </div>
+
+        <!-- Solution Column -->
+        <div class="narrative-column solution-col">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #ef4444; font-weight: 700; letter-spacing: 0.08em;">THE DEVOTEDZEN PARADIGM</span>
+          <h3 style="font-size: 1.75rem; margin-top: 0.75rem;">Zero-Cloud Latency, On-Device Neural Autonomy</h3>
+
+          <div class="narrative-item">
+            <h4 style="color: #fbbf24;">SadakDrishti (सड़क दृष्टि)</h4>
+            <p>Turns vehicle dashcams and patrol fleets into a continuous AI surveying network. Pinpoints potholes and calculates ASTM D6433 PCI scores in real time at highway speeds.</p>
+          </div>
+
+          <div class="narrative-item">
+            <h4 style="color: #38bdf8;">ZenShield Cyber Threat Intelligence</h4>
+            <p>Multi-source dark web scraping, zero-day threat correlation, and automated MITRE ATT&CK mapping that triggers instant firewall containment in under 500ms.</p>
+          </div>
+
+          <div class="narrative-item">
+            <h4 style="color: #34d399;">ZenFit Biomechanical Pose Tracker</h4>
+            <p>High-precision 33-point 3D skeletal tracking directly on standard smartphone cameras. Zero wearables needed. 100% private on-device processing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Product Matrix Section -->
+  <section id="systems" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag zen">Product Systems</span>
+        <h2 class="section-title">The Triad of Frontier Intelligence</h2>
+        <p class="section-desc">Interact with our live neural engines below to see autonomous perception in action.</p>
+      </div>
+
+      <!-- Switcher Buttons (Accessible ARIA Tablist) -->
+      <div class="product-switcher-bar" role="tablist" aria-label="Product Systems Matrix">
+        <button class="switcher-btn active btn-tab-sadak" id="tab-btn-sadak" data-tab="sadak" role="tab" aria-selected="true" tabindex="0" aria-controls="tab-sadak">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19L8 5m8 14l4-14M12 5v14"/></svg>
+          SadakDrishti (Road AI)
+        </button>
+        <button class="switcher-btn btn-tab-cyber" id="tab-btn-cyber" data-tab="cyber" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-cyber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          AI Cyber Threat Intel
+        </button>
+        <button class="switcher-btn btn-tab-fitness" id="tab-btn-fitness" data-tab="fitness" role="tab" aria-selected="false" tabindex="-1" aria-controls="tab-fitness">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          AI Fitness Tracker
+        </button>
+      </div>
+
+      <!-- Tab 1: SadakDrishti -->
+      <div id="tab-sadak" class="tab-pane active" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-sadak">
+        <div class="product-cockpit-grid">
+          <div>
+            <span class="section-tag sadak">Infrastructure Computer Vision</span>
+            <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">SadakDrishti <span style="font-weight: 400; color: #fbbf24;">(सड़क दृष्टि)</span></h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.75rem;">
+              Autonomous road condition surveillance running on on-vehicle dashcams, public transit fleets, and drones. Classifies road distress and automatically dispatches GIS repair tickets.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Sub-Meter Distress Geotagging:</strong> Potholes, fatigue cracks, and lane line degradation mapped with sub-meter GNSS accuracy.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>ASTM D6433 PCI Rating:</strong> Generates standardized Pavement Condition Index ratings to optimize municipal public works allocations.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>NVIDIA Jetson & Dashcam Ready:</strong> Zero continuous cloud uplink required; operates entirely on edge silicon.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="products/sadak-drishti.html" class="btn btn-sadak">Explore SadakDrishti Portal →</a>
+              <button class="btn btn-outline open-demo-modal" data-product="SadakDrishti">Request Pilot Survey</button>
+            </div>
+          </div>
+
+          <!-- Cockpit 1 -->
+          <div class="cockpit-frame">
+            <div class="cockpit-chrome-header">
+              <div class="chrome-dots">
+                <span class="chrome-dot dot-red"></span>
+                <span class="chrome-dot dot-yellow"></span>
+                <span class="chrome-dot dot-green"></span>
+              </div>
+              <div class="chrome-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+                SadakDrishti-AI // Edge Vision Feed
+              </div>
+              <div class="chrome-status-tag" style="color: #fbbf24;">ASTM D6433 PCI: 78/100</div>
+            </div>
+
+            <div class="cockpit-viewport">
+              <canvas id="sadak-sim-canvas" class="cockpit-canvas"></canvas>
+              <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; pointer-events: none;">
+                <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">GPS: 28.6139° N, 77.2090° E</span>
+                <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">SPEED: 58 KM/H</span>
+                <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">ANOMALIES: <strong id="sadak-anomaly-stat" style="color: #fbbf24;">42</strong></span>
+              </div>
+            </div>
+
+            <div class="cockpit-footer">
+              <span style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">MODEL: ONNX-Edge-YOLOv9 [60 FPS]</span>
+              <div style="display: flex; gap: 0.5rem;">
+                <button id="sadak-btn-pause" class="btn btn-sm btn-outline">Pause Feed</button>
+                <button id="sadak-btn-inject" class="btn btn-sm btn-sadak">+ Inject Pothole</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: AI Cyber Threat Intel -->
+      <div id="tab-cyber" class="tab-pane" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-cyber" hidden>
+        <div class="product-cockpit-grid">
+          <div>
+            <span class="section-tag cyber">Autonomous Cybersecurity</span>
+            <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">AI Cyber Threat Intelligence</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.75rem;">
+              Predictive enterprise defense powered by multi-source neural threat correlation. Ingests global honeypot feeds, dark web telemetry, and zero-day exploits to trigger instant perimeter containment.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Dark Web & Breach Surveillance:</strong> Scrapes subterranean ransomware channels and paste sites for exposed enterprise keys.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Automated MITRE ATT&CK Mapping:</strong> Real-time heuristic mapping of adversary tactics to predict lateral movement.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Autonomous SOAR Playbooks:</strong> Integrates with Splunk, CrowdStrike, and Sentinel to revoke compromised tokens in &lt;500ms.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="products/cyber-threat-intelligence.html" class="btn btn-cyber">Explore Cyber Intel Portal →</a>
+              <button class="btn btn-outline open-demo-modal" data-product="AI Cyber Threat Intel">Request Threat Audit</button>
+            </div>
+          </div>
+
+          <!-- Cockpit 2 -->
+          <div class="cockpit-frame">
+            <div class="cockpit-chrome-header">
+              <div class="chrome-dots">
+                <span class="chrome-dot dot-red"></span>
+                <span class="chrome-dot dot-yellow"></span>
+                <span class="chrome-dot dot-green"></span>
+              </div>
+              <div class="chrome-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                ZenShield-SOC // Autonomous Threat Stream
+              </div>
+              <div class="chrome-status-tag" style="color: #38bdf8;">HONEYPOT NODES: 8,420</div>
+            </div>
+
+            <div class="cockpit-viewport" style="display: block; padding: 1rem; background: #060913;">
+              <div id="cyber-soc-feed" style="height: 340px; overflow: hidden; display: flex; flex-direction: column;">
+                <!-- Streaming logs via simulators.js -->
+              </div>
+            </div>
+
+            <div class="cockpit-footer">
+              <span style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">ZERO-DAY HEURISTIC ENGINE: ONLINE</span>
+              <button id="cyber-btn-inject" class="btn btn-sm btn-cyber">+ Simulate Exploit Wave</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: AI Fitness Tracker -->
+      <div id="tab-fitness" class="tab-pane" role="tabpanel" tabindex="0" aria-labelledby="tab-btn-fitness" hidden>
+        <div class="product-cockpit-grid">
+          <div>
+            <span class="section-tag fitness">Biomechanical Vision</span>
+            <h3 style="font-size: 2.2rem; margin-bottom: 1rem;">AI Fitness Tracker <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.8rem; vertical-align: middle; margin-left: 0.5rem;">IN ACTIVE CREATION</span></h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.75rem;">
+              Camera-first digital fitness coach using 33-point 3D skeletal landmarking. Delivers millimeter-precise biomechanical joint angle tracking, rep counting, and audio posture cues.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Zero Wearables Required:</strong> Runs directly through standard mobile or laptop webcams without sensor bands.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>Sub-Degree Joint Angle Flexion:</strong> Verifies parallel squat depth, hip hinges, and elbow lockouts.</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 0.85rem;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="margin-top: 3px; flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span style="font-size: 0.95rem; color: #cbd5e1;"><strong>100% On-Device Privacy:</strong> Video frames stay on the user's device in local WebAssembly. Zero video upload.</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="products/ai-fitness-tracker.html" class="btn btn-fitness">Explore AI Fitness Portal →</a>
+              <button class="btn btn-outline open-demo-modal" data-product="AI Fitness Tracker">Request Early SDK Access</button>
+            </div>
+          </div>
+
+          <!-- Cockpit 3 -->
+          <div class="cockpit-frame">
+            <div class="cockpit-chrome-header">
+              <div class="chrome-dots">
+                <span class="chrome-dot dot-red"></span>
+                <span class="chrome-dot dot-yellow"></span>
+                <span class="chrome-dot dot-green"></span>
+              </div>
+              <div class="chrome-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                ZenFit-Biometrics // 33-Point Skeletal Graph
+              </div>
+              <div class="chrome-status-tag" style="color: #34d399;">REPS COUNTED: <strong id="fitness-rep-stat">14</strong></div>
+            </div>
+
+            <div class="cockpit-viewport">
+              <canvas id="fitness-sim-canvas" class="cockpit-canvas"></canvas>
+            </div>
+
+            <div class="cockpit-footer">
+              <span style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">EXERCISE: SQUATS [DEPTH TRACKER]</span>
+              <div style="display: flex; gap: 0.5rem;">
+                <button id="fitness-btn-pause" class="btn btn-sm btn-outline">Pause</button>
+                <button id="fitness-btn-toggleform" class="btn btn-sm btn-outline">Simulate Form Flaw</button>
+                <button id="fitness-btn-reset" class="btn btn-sm btn-fitness">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works: 3-Step Sequential Pipeline -->
+  <section id="pipeline" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag zen">System Pipeline</span>
+        <h2 class="section-title">The Autonomous Closed-Loop Architecture</h2>
+        <p class="section-desc">From passive optical ingestion to sub-16ms neural deduction and automated work dispatch.</p>
+      </div>
+
+      <div class="pipeline-track">
+        <div class="pipeline-step">
+          <div class="step-num-pill">01</div>
+          <h4>Multi-Modal Ingestion</h4>
+          <p>Passively streams high-frequency optical video, GNSS positioning coordinates, IMU accelerometer vectors, and network telemetry without user intervention.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num-pill">02</div>
+          <h4>Edge Neural Inference</h4>
+          <p>Proprietary vision backbones optimized with TensorRT and ONNX execute local inference in under 16ms—classifying pavement fatigue, threat vectors, or joint angles.</p>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-num-pill">03</div>
+          <h4>Autonomous Closed-Loop</h4>
+          <p>Instantly triggers downstream actions: pushes geo-referenced repair tickets to municipal GIS dashboards, isolates compromised cyber tokens, or emits voice posture cues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Under the Hood / Neural Architecture Bento Grid -->
+  <section id="architecture" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag zen">Deep-Tech Foundations</span>
+        <h2 class="section-title">Engineered From Silicon Upwards</h2>
+        <p class="section-desc">We build proprietary neural architectures tailored specifically for edge efficiency, privacy, and continuous accuracy.</p>
+      </div>
+
+      <div class="bento-showcase">
+        <div class="bento-item span-2">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #ef4444; font-weight: 700; text-transform: uppercase;">ACCELERATED COMPUTE</span>
+          <h4 style="font-size: 1.5rem; margin: 0.6rem 0 0.85rem;">Edge-Optimized Neural Backbones</h4>
+          <p>We train custom vision transformers and convolutional backbones distilled specifically for low-power edge accelerators (NVIDIA Jetson, Apple Neural Engine, Android NNAPI). Achieve sub-16ms latencies with minimal power draw and zero cloud round-trip delay.</p>
+        </div>
+
+        <div class="bento-item">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #06b6d4; font-weight: 700; text-transform: uppercase;">PRIVACY FIRST</span>
+          <h4 style="font-size: 1.5rem; margin: 0.6rem 0 0.85rem;">Zero-Knowledge Local Processing</h4>
+          <p>Raw camera frames and sensitive network packets never leave client devices. Raw data is processed in ephemeral memory, outputting only encrypted metadata.</p>
+        </div>
+
+        <div class="bento-item">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #f59e0b; font-weight: 700; text-transform: uppercase;">SENSOR FUSION</span>
+          <h4 style="font-size: 1.5rem; margin: 0.6rem 0 0.85rem;">Multi-Modal Spatial Correlation</h4>
+          <p>Correlates camera video feeds with high-frequency inertial IMUs and RTK GNSS coordinates for sub-meter geo-referencing on high-speed roadways.</p>
+        </div>
+
+        <div class="bento-item span-2">
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #10b981; font-weight: 700; text-transform: uppercase;">ADAPTIVE LEARNING</span>
+          <h4 style="font-size: 1.5rem; margin: 0.6rem 0 0.85rem;">Self-Supervised Domain Adaptation</h4>
+          <p>Our models adapt across extreme environmental shifts—monsoon rains, unlit nighttime highways, diverse asphalt compositions, and novel polymorphic cyberattack variants.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive ROI Calculator Section -->
+  <section id="calculator" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag sadak">Economic Impact</span>
+        <h2 class="section-title">Road Infrastructure Survey ROI Calculator</h2>
+        <p class="section-desc">Estimate your operational expenditure savings by switching from manual walking inspection crews to SadakDrishti AI automation.</p>
+      </div>
+
+      <div class="calc-wrapper">
+        <div>
+          <div class="calc-track-container">
+            <div class="calc-track-header">
+              <span>Road Network Length to Survey</span>
+              <span id="calc-road-km-val" style="color: #fbbf24; font-family: var(--font-mono);">2,500 km</span>
+            </div>
+            <input type="range" id="calc-road-km" class="calc-slider" min="200" max="15000" step="100" value="2500">
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; font-family: var(--font-mono);">
+              <span>200 km (Municipal)</span>
+              <span>15,000 km (National Expressways)</span>
+            </div>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-hairline);">
+            <div style="font-weight: 700; color: #cbd5e1; margin-bottom: 0.35rem;">Manual Inspection Bottlenecks:</div>
+            <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">Walking crews with dipsticks and manual laser rigs cost ~₹2,800/km and require 6+ months for basic data consolidation.</p>
+            <div style="font-weight: 700; color: #fbbf24; margin-bottom: 0.35rem;">SadakDrishti Autonomous Advantage:</div>
+            <p style="font-size: 0.9rem;">Mounted on ordinary patrol or utility vehicles, surveying costs plummet to ~₹550/km with real-time GIS dashboard outputs.</p>
+          </div>
+        </div>
+
+        <div class="calc-summary-box">
+          <div style="margin-bottom: 1.75rem;">
+            <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.05em;">ESTIMATED BUDGET SAVINGS</div>
+            <div id="calc-savings-cost" style="font-size: 2.8rem; font-family: var(--font-mono); font-weight: 800; color: #34d399; line-height: 1.1;">₹56.3 Lakhs+</div>
+            <div style="font-size: 0.85rem; color: #6ee7b7; margin-top: 4px;">~78% lower operating expenditure</div>
+          </div>
+
+          <div style="margin-bottom: 2rem;">
+            <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; font-family: var(--font-mono); letter-spacing: 0.05em;">SURVEY TIME SAVED</div>
+            <div id="calc-savings-time" style="font-size: 2.2rem; font-family: var(--font-mono); font-weight: 800; color: #f87171; line-height: 1.1;">450 Days</div>
+            <div style="font-size: 0.85rem; color: #fca5a5; margin-top: 4px;">Surveys completed 12x faster with automated work orders</div>
+          </div>
+
+          <button class="btn btn-sadak open-demo-modal" data-product="SadakDrishti">Schedule a Pilot Deployment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hardware & Integration Ecosystem -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag zen">Hardware & Enterprise Compatibility</span>
+        <h2 class="section-title">Built for Modern Hardware & SOC Stacks</h2>
+      </div>
+
+      <div class="integration-ribbon">
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+          NVIDIA Jetson Edge
+        </div>
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          Android Automotive
+        </div>
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          CrowdStrike Falcon
+        </div>
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8m-4-4h8"/></svg>
+          Splunk Enterprise
+        </div>
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
+          ArcGIS & QGIS
+        </div>
+        <div class="integration-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v18"></path></svg>
+          ONNX Runtime & TensorRT
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & Field Pilots -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag zen">Field Validation</span>
+        <h2 class="section-title">Trusted in Mission-Critical Environments</h2>
+      </div>
+
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "SadakDrishti eliminated three months of manual road condition auditing. Having automated ASTM D6433 PCI scores directly inside our municipal GIS maps transformed our road maintenance budget allocation."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">SC</div>
+            <div>
+              <div class="author-name">Smart City Director</div>
+              <div class="author-role">Municipal Infrastructure Mission</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "ZenShield CTI flagged an exposed API secret on an illicit dark web board six days before any commercial scanner caught it. The autonomous token revocation saved us from an extortion attempt."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background: rgba(6, 182, 212, 0.2); color: #38bdf8;">CS</div>
+            <div>
+              <div class="author-name">Chief Information Security Officer</div>
+              <div class="author-role">FinTech Enterprise Banking</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">
+            "Embedding the DevotedZen AI Fitness Tracker SDK into our mobile app gave our members real-time audio posture cues during squats without needing any wearable hardware. Engagement surged by 40%."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">VP</div>
+            <div>
+              <div class="author-name">VP of Product Engineering</div>
+              <div class="author-role">Connected Health & Fitness Chain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Frequently Asked Questions -->
+  <section class="section">
+    <div class="container" style="max-width: 860px;">
+      <div class="section-header">
+        <span class="section-tag zen">Frequently Asked Questions</span>
+        <h2 class="section-title">Answers for Engineers & Leaders</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How fast can SadakDrishti be mounted on patrol vehicles?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            A standard Android dashcam running SadakDrishti installs in under 5 minutes with a standard suction windshield mount. For enterprise municipal transit buses, our ruggedized NVIDIA Jetson edge box plugs directly into 12V vehicle power.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does AI Cyber Threat Intelligence support air-gapped on-premise environments?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            Yes. We support air-gapped on-premise appliance deployments and private Kubernetes clusters (EKS/GKE/OpenShift) for defense agencies, central banks, and organizations with strict data sovereignty mandates.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is user camera video ever uploaded when using the AI Fitness Tracker?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            No. All 33-point skeletal landmarking is calculated locally in WebAssembly or the smartphone's neural engine. Video frames are discarded immediately after joint extraction. Zero video is transmitted or stored on any server.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How can developers and partners access the AI Fitness Tracker SDK?</span>
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer">
+            The AI Fitness Tracker SDK is currently in early-access beta with select health tech partners. You can apply for developer API keys and sample mobile repositories using the Schedule Briefing button.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final High-Impact Conversion CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="zen-card" style="padding: 5rem 3rem; text-align: center; border-color: rgba(99, 102, 241, 0.4); background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2), rgba(9, 13, 24, 0.95) 75%);">
+        <h2 style="font-size: clamp(2.2rem, 4vw, 3.25rem); margin-bottom: 1.25rem;">
+          Ready to Deploy Frontier AI Into Your Operations?
+        </h2>
+        <p style="max-width: 660px; margin: 0 auto 2.5rem; font-size: 1.15rem;">
+          Whether you need intelligent road surveillance for municipal infrastructure, predictive cyber threat feeds, or the AI Fitness Tracker SDK, our engineering team is ready.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg open-demo-modal" data-product="All Systems">Schedule an Executive Briefing</button>
+          <a href="contact.html" class="btn btn-outline btn-lg">Contact Research Labs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div>
+          <a href="index.html" class="brand-logo" style="margin-bottom: 1.25rem;">
+            <img src="assets/logo-icon.svg" alt="DevotedZen Labs" class="brand-img-icon" width="38" height="38">
+            <div>
+              <div class="brand-name">Devoted<span>Zen</span></div>
+              <div class="brand-badge">Labs</div>
+            </div>
+          </a>
+          <p style="max-width: 320px; font-size: 0.95rem;">
+            Devoted engineering. Zen clarity. Building autonomous computer vision and predictive intelligence for critical physical and digital systems.
+          </p>
+          <div style="margin-top: 1.5rem; font-size: 0.8rem; color: #94a3b8; font-family: var(--font-mono); line-height: 1.6;">
+            Headquarters: Maitidevi, Kathmandu, Nepal<br>
+            Applied AI & Edge Perception Systems.
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Flagship Systems</h5>
+          <ul class="footer-links">
+            <li><a href="products/sadak-drishti.html">SadakDrishti (Road AI)</a></li>
+            <li><a href="products/cyber-threat-intelligence.html">AI Cyber Threat Intel</a></li>
+            <li><a href="products/ai-fitness-tracker.html">AI Fitness Tracker (ZenFit)</a></li>
+            <li><a href="#architecture">Edge Neural Architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">About DevotedZen</a></li>
+            <li><a href="about.html#philosophy">Engineering Culture</a></li>
+            <li><a href="contact.html">Research Inquiries</a></li>
+            <li><a href="contact.html#careers">Careers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Enterprise Access</h5>
+          <p style="font-size: 0.875rem; color: #94a3b8; margin-bottom: 1rem;">
+            Request field trials, municipal tenders, or early SDK keys:
+          </p>
+          <button class="btn btn-outline btn-sm open-demo-modal" data-product="All Systems" style="width: 100%;">Schedule Briefing</button>
+        </div>
+      </div>
+
+      <div class="footer-legal-bottom">
+        <div>
+          &copy; 2026 DevotedZen Labs. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 1.75rem;">
+          <a href="#">Privacy Framework</a>
+          <a href="#">Terms of Deployment</a>
+          <a href="#">Security Telemetry</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Schedule Briefing Modal Dialog -->
+  <div id="demo-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close close-demo-modal" aria-label="Close Modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div style="margin-bottom: 1.5rem;">
+        <span class="section-tag zen" style="font-size: 0.725rem; padding: 0.2rem 0.6rem;">TECHNICAL BRIEFING</span>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem;">Schedule an Engineering Briefing</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8;">Meet our core systems engineers to evaluate live models, benchmark metrics, and pilot deployment.</p>
+      </div>
+
+      <form id="demo-form">
+        <div class="form-group">
+          <label class="form-label" for="modal-name">Full Name *</label>
+          <input type="text" id="modal-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modal-email">Official / Corporate Email *</label>
+          <input type="email" id="modal-email" class="form-input" placeholder="name@organization.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modal-product-select">Product of Interest *</label>
+          <select id="modal-product-select" class="form-select" required>
+            <option value="SadakDrishti">SadakDrishti (Road Inspection AI)</option>
+            <option value="AI Cyber Threat Intel">AI Cyber Threat Intelligence</option>
+            <option value="AI Fitness Tracker">AI Fitness Tracker (Early Access SDK)</option>
+            <option value="All Systems">Custom Enterprise Computer Vision</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modal-org">Organization / Department</label>
+          <input type="text" id="modal-org" class="form-input" placeholder="e.g. Municipal Corp / Smart City / Enterprise">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Confirm & Transmit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/simulators.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. SadakDrishti Simulator
+      const sadakSim = window.initSadakSimulator('sadak-sim-canvas');
+      const pauseBtn = document.getElementById('sadak-btn-pause');
+      const injectBtn = document.getElementById('sadak-btn-inject');
+      if (pauseBtn && sadakSim) {
+        pauseBtn.addEventListener('click', () => {
+          const isPlaying = sadakSim.togglePlay();
+          pauseBtn.textContent = isPlaying ? 'Pause Feed' : 'Resume Feed';
+        });
+      }
+      if (injectBtn && sadakSim) {
+        injectBtn.addEventListener('click', () => {
+          sadakSim.injectAnomaly();
+          window.showToast('Surface distress [P-MAX] tagged and sent to GIS work order queue!', 'success');
+        });
+      }
+
+      // 2. Cyber Threat Simulator
+      const cyberSim = window.initCyberSimulator('cyber-soc-feed');
+      const cyberInjectBtn = document.getElementById('cyber-btn-inject');
+      if (cyberInjectBtn && cyberSim) {
+        cyberInjectBtn.addEventListener('click', () => {
+          cyberSim.injectAlert();
+          window.showToast('Zero-day exploit correlated and quarantined autonomously!', 'success');
+        });
+      }
+
+      // 3. AI Fitness Tracker Simulator
+      const fitSim = window.initFitnessSimulator('fitness-sim-canvas');
+      const fitPauseBtn = document.getElementById('fitness-btn-pause');
+      const fitToggleBtn = document.getElementById('fitness-btn-toggleform');
+      const fitResetBtn = document.getElementById('fitness-btn-reset');
+
+      if (fitPauseBtn && fitSim) {
+        fitPauseBtn.addEventListener('click', () => {
+          const isPlaying = fitSim.togglePlay();
+          fitPauseBtn.textContent = isPlaying ? 'Pause' : 'Resume';
+        });
+      }
+      if (fitToggleBtn && fitSim) {
+        fitToggleBtn.addEventListener('click', () => {
+          const isBad = fitSim.toggleBadForm();
+          fitToggleBtn.textContent = isBad ? 'Form: Flawed (Warning)' : 'Form: Normal';
+          window.showToast(isBad ? 'Form error simulated: Forward torso lean warning triggered' : 'Restored optimal posture alignment', 'info');
+        });
+      }
+      if (fitResetBtn && fitSim) {
+        fitResetBtn.addEventListener('click', () => {
+          fitSim.resetReps();
+          window.showToast('Rep counter reset to 0', 'info');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Background / Glow Gradients -->
+    <linearGradient id="dzGradPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="50%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="dzGradSecondary" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+    <linearGradient id="dzGradCore" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fca5a5"/>
+    </linearGradient>
+    <filter id="crimsonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Dark Shield Base Ring -->
+  <circle cx="50" cy="50" r="44" fill="#080b12" stroke="rgba(239, 68, 68, 0.25)" stroke-width="2"/>
+
+  <!-- Outer Cyber Orbit Accents -->
+  <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(239, 68, 68, 0.4)" stroke-width="1.2" stroke-dasharray="8 6"/>
+  <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(239, 68, 68, 0.15)" stroke-width="1" stroke-dasharray="32 16 12 16"/>
+
+  <!-- Enso Ring Fragment (Zen Devotion) -->
+  <path d="M 50 14 A 36 36 0 1 1 18 64" fill="none" stroke="url(#dzGradPrimary)" stroke-width="3.5" stroke-linecap="round" filter="url(#crimsonGlow)"/>
+
+  <!-- Geometric Interlocking 'D' and 'Z' Neural Monogram -->
+  <!-- 'D' Loop -->
+  <path d="M 32 30 L 46 30 C 58 30 63 38 63 46 C 63 53 58 59 48 60 L 32 60 Z" 
+        fill="none" stroke="url(#dzGradSecondary)" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- 'Z' Dynamic Diagonal & Crossbar -->
+  <path d="M 38 40 L 68 40 L 40 68 L 70 68" 
+        fill="none" stroke="url(#dzGradPrimary)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" filter="url(#crimsonGlow)"/>
+
+  <!-- Focal Quantum / Neural Core -->
+  <circle cx="50" cy="50" r="4.5" fill="url(#dzGradCore)" filter="url(#crimsonGlow)"/>
+  <circle cx="50" cy="50" r="2" fill="#ffffff"/>
+
+  <!-- Precision Corner Reticles -->
+  <line x1="50" y1="8" x2="50" y2="12" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="88" x2="50" y2="92" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line x1="8" y1="50" x2="12" y2="50" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+  <line x1="88" y1="50" x2="92" y2="50" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+</svg>

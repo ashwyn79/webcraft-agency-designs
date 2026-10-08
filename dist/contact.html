@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Inquiries | DevotedZen Labs</title>
+  <meta name="description" content="Contact DevotedZen Labs to request product demos, pilot field trials for SadakDrishti, threat intelligence briefs, or SDK access. Maitidevi, Kathmandu, Nepal.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
+
+  <!-- Typography: Manrope (Headings) | Inter (Body) | JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-inner">
+        <a href="index.html" class="brand-logo" aria-label="DevotedZen Labs Homepage">
+          <img src="assets/logo-icon.svg" alt="DevotedZen Labs Icon" class="brand-img-icon" width="40" height="40">
+          <div>
+            <div class="brand-name">Devoted<span>Zen</span></div>
+            <div class="brand-badge">Labs</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-dropdown-wrapper">
+              <a href="index.html#systems" class="nav-link">
+                Products
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </a>
+              <div class="nav-dropdown">
+                <a href="products/sadak-drishti.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon sadak">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19L8 5m8 14l4-14M12 5v14"/></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">SadakDrishti (सड़क दृष्टि)</div>
+                    <div class="dropdown-item-desc">AI Road Inspection & ASTM D6433 PCI</div>
+                  </div>
+                </a>
+                <a href="products/cyber-threat-intelligence.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon cyber">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">AI Cyber Threat Intel</div>
+                    <div class="dropdown-item-desc">Predictive SOC Defense & Dark Web Feed</div>
+                  </div>
+                </a>
+                <a href="products/ai-fitness-tracker.html" class="nav-dropdown-item">
+                  <div class="nav-dropdown-icon fitness">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                  </div>
+                  <div>
+                    <div class="dropdown-item-title">AI Fitness Tracker</div>
+                    <div class="dropdown-item-desc">33-Point Pose Estimation & Kinematics</div>
+                  </div>
+                </a>
+              </div>
+            </li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link active">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="#contact-form-section" class="btn btn-primary btn-sm">Direct Inquiry</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="section-tag zen">
+          LET'S CONNECT
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        Engage with Our<br>
+        <span class="text-gradient-zen">AI Systems & Pilot Team</span>
+      </h1>
+
+      <p class="hero-description">
+        Whether you are evaluating a highway survey pilot for SadakDrishti, protecting enterprise infrastructure, or integrating our AI Fitness Tracker SDK, we are here to support your mission.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info Grid -->
+  <section id="contact-form-section" class="section section-alt">
+    <div class="container">
+      <div class="grid-2" style="gap: 3.5rem;">
+        
+        <!-- Form Column -->
+        <div class="zen-card" style="padding: 3rem;">
+          <h3 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Send an Official Inquiry</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 2rem;">We typically reply within 24 hours on business days.</p>
+
+          <form id="contact-page-form">
+            <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Your Name *</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="e.g. Vikram Malhotra" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address *</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="vikram@org.in" required>
+              </div>
+            </div>
+
+            <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+              <div class="form-group">
+                <label class="form-label" for="contact-phone">Phone / Mobile</label>
+                <input type="tel" id="contact-phone" class="form-input" placeholder="+91 98765 43210">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contact-org">Organization / Department *</label>
+                <input type="text" id="contact-org" class="form-input" placeholder="e.g. Smart City Mission / Enterprise" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-product">Product of Interest *</label>
+              <select id="contact-product" class="form-select" required>
+                <option value="SadakDrishti">SadakDrishti (Road Inspection AI)</option>
+                <option value="AI Cyber Threat Intel">AI Cyber Threat Intelligence</option>
+                <option value="AI Fitness Tracker">AI Fitness Tracker (Developer SDK)</option>
+                <option value="Custom Enterprise AI">Custom Enterprise Computer Vision</option>
+                <option value="Partnership / Investment">Partnership & Research Inquiries</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Project Scope / Requirements *</label>
+              <textarea id="contact-message" class="form-textarea" rows="4" placeholder="Tell us about your road network size, security endpoints, or integration goals..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Transmit Inquiry to Engineering Team</button>
+          </form>
+        </div>
+
+        <!-- Info Column -->
+        <div style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <span class="section-tag zen">Corporate Headquarters</span>
+            <h3 style="font-size: 2rem; margin-bottom: 1.25rem;">DevotedZen Labs</h3>
+            <p style="margin-bottom: 2rem;">
+              Deep-tech artificial intelligence and computer vision research lab located in Maitidevi, Kathmandu, Nepal. Focused on applied deep-learning and edge perception research.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;">
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 0.65rem; border-radius: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <strong style="color: #fff; display: block; font-size: 0.95rem;">Official Correspondence</strong>
+                  <span style="color: #94a3b8; font-size: 0.9rem;">inquiries@devotedzen.com</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 0.65rem; border-radius: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <strong style="color: #fff; display: block; font-size: 0.95rem;">Research Labs & Operations</strong>
+                  <span style="color: #94a3b8; font-size: 0.9rem;">Maitidevi, Kathmandu, Nepal</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                <div style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 0.65rem; border-radius: 8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <strong style="color: #fff; display: block; font-size: 0.95rem;">Operating Hours</strong>
+                  <span style="color: #94a3b8; font-size: 0.9rem;">Monday &ndash; Friday, 09:30 &ndash; 18:30 NPT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="zen-card" style="padding: 2rem; background: #080c16;">
+            <div style="font-weight: 700; color: #fca5a5; font-size: 0.95rem; margin-bottom: 0.5rem;">Urgent Public Safety Inquiries</div>
+            <p style="font-size: 0.875rem; color: #94a3b8;">
+              For urgent highway road hazard assessments or active enterprise ransomware incidents requiring CTI feeds, indicate "PRIORITY 1" in your message for immediate dispatch.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-legal-bottom">
+        <div>
+          &copy; 2026 DevotedZen Labs. All rights reserved.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="index.html">Home</a>
+          <a href="products/sadak-drishti.html">SadakDrishti</a>
+          <a href="products/cyber-threat-intelligence.html">AI Cyber Threat Intel</a>
+          <a href="products/ai-fitness-tracker.html">AI Fitness Tracker</a>
+          <a href="about.html">About Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactForm = document.getElementById('contact-page-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const submitBtn = contactForm.querySelector('button[type="submit"]');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Transmitting...';
+
+          setTimeout(() => {
+            contactForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Transmit Inquiry to Engineering Team';
+            window.showToast('Inquiry successfully sent! An engineer from DevotedZen Labs will follow up with you shortly.', 'success');
+          }, 700);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

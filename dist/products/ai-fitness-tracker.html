@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Fitness Tracker | Real-Time Biomechanical Coaching | DevotedZen Labs</title>
+  <meta name="description" content="AI Fitness Tracker by DevotedZen Labs uses real-time 33-point 3D pose estimation, joint angle tracking, and automated rep counting without wearables.">
+  <meta name="keywords" content="AI Fitness Tracker, Computer Vision Fitness, Pose Estimation, Real-time rep counter, Biomechanics AI, DevotedZen Labs, Smart Gym SDK">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-icon.svg">
+
+  <!-- Typography: Manrope (Headings) | Inter (Body) | JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-inner">
+        <a href="../index.html" class="brand-logo" aria-label="DevotedZen Labs Homepage">
+          <img src="../assets/logo-icon.svg" alt="DevotedZen Labs Icon" class="brand-img-icon" width="40" height="40">
+          <div>
+            <div class="brand-name">Devoted<span>Zen</span></div>
+            <div class="brand-badge">Labs</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="sadak-drishti.html" class="nav-link">SadakDrishti</a></li>
+            <li><a href="cyber-threat-intelligence.html" class="nav-link">Cyber Intel</a></li>
+            <li><a href="ai-fitness-tracker.html" class="nav-link active" style="color: var(--fit-mint);">AI Fitness</a></li>
+            <li><a href="../about.html" class="nav-link">About</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-fitness btn-sm open-demo-modal" data-product="AI Fitness Tracker">Get SDK Access</button>
+          <button class="mobile-toggle" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Hero -->
+  <section class="hero" style="background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(16, 185, 129, 0.16), transparent 70%);">
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="section-tag fitness">
+          IN ACTIVE CREATION • EARLY ACCESS SDK
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        AI Fitness Tracker<br>
+        <span class="text-gradient-fitness">Camera-First 3D Pose Estimation & Form Coaching</span>
+      </h1>
+
+      <p class="hero-description">
+        Eliminate wearable wrist straps. DevotedZen's AI Fitness Tracker turns any smartphone or web camera into a high-precision biomechanical coach—tracking 33 skeletal keypoints, counting reps, and delivering real-time posture correction.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-fitness btn-lg open-demo-modal" data-product="AI Fitness Tracker">Join Developer Beta / SDK</button>
+        <a href="#biomechanics" class="btn btn-outline btn-lg">Biomechanical Specifications</a>
+      </div>
+
+      <!-- Live Cockpit Simulator -->
+      <div class="cockpit-frame" style="max-width: 980px; margin: 3rem auto 0; text-align: left;">
+        <div class="cockpit-chrome-header">
+          <div class="chrome-dots">
+            <span class="chrome-dot dot-red"></span>
+            <span class="chrome-dot dot-yellow"></span>
+            <span class="chrome-dot dot-green"></span>
+          </div>
+          <div class="chrome-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            ZenFit-Vision // Real-Time Biomechanical Pose Estimator
+          </div>
+          <div class="chrome-status-tag" style="color: #34d399;">ON-DEVICE INFERENCE: &lt;12ms</div>
+        </div>
+
+        <div class="cockpit-viewport" style="min-height: 400px;">
+          <canvas id="fitness-full-canvas" class="cockpit-canvas" style="height: 400px;"></canvas>
+          <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; pointer-events: none;">
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">MODEL: 33-KEYPOINT 3D SKELETAL GRAPH</span>
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">TOTAL REPS: <strong id="fitness-page-reps" style="color: #34d399;">14</strong></span>
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">METRIC: KNEE FLEXION ANGLE</span>
+          </div>
+        </div>
+
+        <div class="cockpit-footer">
+          <div style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">
+            TRACKING: PARALLEL SQUAT DEPTH & TORSO INCLINATION
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="fitness-page-pause" class="btn btn-sm btn-outline">Pause</button>
+            <button id="fitness-page-toggleform" class="btn btn-sm btn-outline">Simulate Posture Flaw</button>
+            <button id="fitness-page-reset" class="btn btn-sm btn-fitness">Reset Reps</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Biomechanics Features -->
+  <section id="biomechanics" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag fitness">Computer Vision Science</span>
+        <h2 class="section-title">Beyond Basic Step Counting</h2>
+        <p class="section-desc">Traditional smartwatches only know when you move your arm. DevotedZen AI models the full kinematic chain of the human body.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">33-Point 3D Skeletal Graph</h4>
+          <p>Extracts sub-pixel 3D coordinates for all major anatomical joints—shoulders, elbows, wrists, hips, knees, ankles, and spinal curvature—at 60 frames per second.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Dynamic Rep & Depth Verification</h4>
+          <p>Only counts valid repetitions that fulfill strict biomechanical criteria (e.g. parallel squat depth &lt; 90°, full arm lockout, spinal neutral alignment). Eliminates cheat reps.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">100% Private On-Device Processing</h4>
+          <p>Operates entirely within client-side WebAssembly and mobile neural coprocessors. Raw video never touches our servers, safeguarding complete user privacy in bedrooms and gym locker rooms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Applications & SDK -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag fitness">SDK Integration</span>
+        <h2 class="section-title">Where DevotedZen Fitness AI Excels</h2>
+        <p class="section-desc">Designed as a turnkey SDK and white-label engine for fitness apps, smart mirrors, and physical therapy clinics.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="zen-card">
+          <h4 style="font-size: 1.4rem; margin-bottom: 1rem; color: #34d399;">Smart Gyms & Digital Health Apps</h4>
+          <p style="margin-bottom: 1.5rem;">
+            Embed camera-based AI coaching directly into your existing iOS/Android consumer apps. Empower users to do guided workouts at home while receiving real-time audio corrections like "Drive through your heels" or "Chest up".
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; color: #cbd5e1; font-size: 0.95rem;">
+            <li>✓ Supports 40+ popular exercises (Squats, Deadlifts, Pushups, Lunges, Plank, Shoulder Press).</li>
+            <li>✓ Voice coaching synthesized in real-time.</li>
+            <li>✓ Leaderboard & form score gamification for fitness studios.</li>
+          </ul>
+        </div>
+
+        <div class="zen-card">
+          <h4 style="font-size: 1.4rem; margin-bottom: 1rem; color: #34d399;">Tele-Rehabilitation & Ergonomics</h4>
+          <p style="margin-bottom: 1.5rem;">
+            Physical therapists can prescribe rehabilitation routines and review objective patient compliance. Track joint range-of-motion recovery curves over time with clinical millimeter accuracy.
+          </p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; color: #cbd5e1; font-size: 0.95rem;">
+            <li>✓ Post-operative range-of-motion (ROM) degree tracking.</li>
+            <li>✓ Spinal posture analysis for remote desk workers.</li>
+            <li>✓ HIPAA & DPDP compliant zero-cloud video telemetry.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-legal-bottom">
+        <div>
+          &copy; 2026 DevotedZen Labs. All rights reserved. &bull; Maitidevi, Kathmandu, Nepal
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="../index.html">Home</a>
+          <a href="sadak-drishti.html">SadakDrishti</a>
+          <a href="cyber-threat-intelligence.html">AI Cyber Intel</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Demo Modal -->
+  <div id="demo-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close close-demo-modal" aria-label="Close Modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div style="margin-bottom: 1.5rem;">
+        <span class="section-tag fitness" style="font-size: 0.725rem; padding: 0.2rem 0.6rem;">EARLY ACCESS SDK</span>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem;">Join AI Fitness Tracker Developer Beta</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8;">Gain early access to our mobile SDK, pose models, and sample apps.</p>
+      </div>
+
+      <form id="demo-form">
+        <div class="form-group">
+          <label class="form-label" for="modal-name">Full Name *</label>
+          <input type="text" id="modal-name" class="form-input" placeholder="e.g. Priya Sharma" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-email">Work / Developer Email *</label>
+          <input type="email" id="modal-email" class="form-input" placeholder="priya@fitnessapp.io" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-org">Company / App Name *</label>
+          <input type="text" id="modal-org" class="form-input" placeholder="e.g. FitPulse Studio" required>
+        </div>
+        <input type="hidden" id="modal-product-select" value="AI Fitness Tracker">
+        <button type="submit" class="btn btn-fitness" style="width: 100%; margin-top: 1rem;">Request Early Access Key</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/simulators.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageSim = window.initFitnessSimulator('fitness-full-canvas');
+      const pauseBtn = document.getElementById('fitness-page-pause');
+      const toggleBtn = document.getElementById('fitness-page-toggleform');
+      const resetBtn = document.getElementById('fitness-page-reset');
+
+      if (pauseBtn && pageSim) {
+        pauseBtn.addEventListener('click', () => {
+          const isPlaying = pageSim.togglePlay();
+          pauseBtn.textContent = isPlaying ? 'Pause' : 'Resume';
+        });
+      }
+      if (toggleBtn && pageSim) {
+        toggleBtn.addEventListener('click', () => {
+          const isBad = pageSim.toggleBadForm();
+          toggleBtn.textContent = isBad ? 'Form: Flawed (Warning)' : 'Form: Normal';
+          window.showToast(isBad ? 'Form error simulated: Excessive torso forward lean detected' : 'Normal spine posture restored', 'info');
+        });
+      }
+      if (resetBtn && pageSim) {
+        resetBtn.addEventListener('click', () => {
+          pageSim.resetReps();
+          window.showToast('Rep count reset', 'info');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

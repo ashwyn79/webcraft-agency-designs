@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Cyber Threat Intelligence | Enterprise SOC Defense | DevotedZen Labs</title>
+  <meta name="description" content="AI Cyber Threat Intelligence by DevotedZen Labs delivers autonomous threat hunting, dark web monitoring, MITRE ATT&CK correlation, and zero-day defense.">
+  <meta name="keywords" content="Cyber Threat Intelligence, AI Cybersecurity, Dark Web Monitoring, SOC Automation, MITRE ATT&CK, Zero Day Defense">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-icon.svg">
+
+  <!-- Typography: Manrope (Headings) | Inter (Body) | JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-inner">
+        <a href="../index.html" class="brand-logo" aria-label="DevotedZen Labs Homepage">
+          <img src="../assets/logo-icon.svg" alt="DevotedZen Labs Icon" class="brand-img-icon" width="40" height="40">
+          <div>
+            <div class="brand-name">Devoted<span>Zen</span></div>
+            <div class="brand-badge">Labs</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="sadak-drishti.html" class="nav-link">SadakDrishti</a></li>
+            <li><a href="cyber-threat-intelligence.html" class="nav-link active" style="color: var(--cyber-blue);">Cyber Intel</a></li>
+            <li><a href="ai-fitness-tracker.html" class="nav-link">AI Fitness</a></li>
+            <li><a href="../about.html" class="nav-link">About</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-cyber btn-sm open-demo-modal" data-product="AI Cyber Threat Intel">Request Threat Audit</button>
+          <button class="mobile-toggle" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Hero -->
+  <section class="hero" style="background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(6, 182, 212, 0.16), transparent 70%);">
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="section-tag cyber">
+          AUTONOMOUS CYBER DEFENSE
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        AI Cyber Threat Intelligence<br>
+        <span class="text-gradient-cyber">Predictive Enterprise Defense & Dark Web Ingestion</span>
+      </h1>
+
+      <p class="hero-description">
+        Eliminate alert fatigue. DevotedZen CTI ingests multi-source threat telemetry, maps adversary campaigns in real-time to MITRE ATT&CK, and triggers autonomous remediation before perimeter compromise.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-cyber btn-lg open-demo-modal" data-product="AI Cyber Threat Intel">Request Threat Briefing</button>
+        <a href="#ioc-lookup" class="btn btn-outline btn-lg">Test Interactive IOC Search</a>
+      </div>
+
+      <!-- Live Cockpit Simulator -->
+      <div class="cockpit-frame" style="max-width: 980px; margin: 3rem auto 0; text-align: left;">
+        <div class="cockpit-chrome-header">
+          <div class="chrome-dots">
+            <span class="chrome-dot dot-red"></span>
+            <span class="chrome-dot dot-yellow"></span>
+            <span class="chrome-dot dot-green"></span>
+          </div>
+          <div class="chrome-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            ZenShield-CTI // Enterprise SOC Telemetry Feed
+          </div>
+          <div class="chrome-status-tag" style="color: #38bdf8;">NEURAL CORRELATION ACTIVE</div>
+        </div>
+
+        <div class="cockpit-viewport" style="padding: 1.25rem; display: block; background: #060913;">
+          <div id="cyber-page-feed" style="height: 320px; overflow: hidden; display: flex; flex-direction: column;">
+            <!-- Rendered by simulators.js -->
+          </div>
+        </div>
+
+        <div class="cockpit-footer">
+          <div style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">
+            GLOBAL THREAT NODES: 8,420 ACTIVE HONEYPOTS
+          </div>
+          <button id="cyber-page-inject" class="btn btn-sm btn-cyber">+ Inject Zero-Day Exploit Attempt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive IOC Lookup Tool -->
+  <section id="ioc-lookup" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag cyber">Threat Hunter Playground</span>
+        <h2 class="section-title">Instant Indicator of Compromise (IOC) Enrichment</h2>
+        <p class="section-desc">Test our real-time threat intelligence lookup. Search any IP, domain, or malicious SHA256 hash to view instant attribution.</p>
+      </div>
+
+      <div class="zen-card" style="max-width: 840px; margin: 0 auto; padding: 2.75rem; background: #080c16;">
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <input type="text" id="ioc-input" class="form-input" style="flex: 1; min-width: 260px;" placeholder="e.g. 185.220.101.5, bad-c2.darknet, or click a sample below">
+          <button id="ioc-btn-search" class="btn btn-cyber">Analyze Threat</button>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 2rem; align-items: center; flex-wrap: wrap; font-size: 0.85rem;">
+          <span style="color: #64748b;">Try Sample IOCs:</span>
+          <button class="sample-ioc-btn" data-val="185.220.101.5" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-hairline); color: #38bdf8; padding: 3px 9px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem;">185.220.101.5 (Tor Exit C2)</button>
+          <button class="sample-ioc-btn" data-val="auth-phish-portal.live" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-hairline); color: #38bdf8; padding: 3px 9px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem;">auth-phish-portal.live</button>
+          <button class="sample-ioc-btn" data-val="7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-hairline); color: #38bdf8; padding: 3px 9px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem;">SHA256: 7f83b1... [Locker]</button>
+        </div>
+
+        <div id="ioc-result-card" style="display: none; background: #050811; border: 1px solid rgba(6, 182, 212, 0.3); border-radius: var(--radius-md); padding: 2rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+            <div>
+              <div style="font-size: 0.75rem; color: #64748b; font-family: var(--font-mono);">ENRICHED INDICATOR</div>
+              <div id="ioc-target-display" style="font-size: 1.35rem; font-weight: 700; color: #f8fafc; font-family: var(--font-mono);">185.220.101.5</div>
+            </div>
+            <div>
+              <span id="ioc-risk-badge" class="badge" style="background: rgba(239, 68, 68, 0.2); color: #ef4444; border: 1px solid #ef4444; font-size: 0.85rem; padding: 0.35rem 0.8rem;">RISK SCORE: 98/100 (CRITICAL)</span>
+            </div>
+          </div>
+
+          <div class="grid-3" style="gap: 1rem; margin-bottom: 1.5rem; font-size: 0.85rem;">
+            <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: 6px;">
+              <div style="color: #94a3b8; font-size: 0.75rem;">THREAT ATTRIBUTION</div>
+              <div style="font-weight: 600; color: #cbd5e1; margin-top: 2px;">APT-29 / Midnight Blizzard</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: 6px;">
+              <div style="color: #94a3b8; font-size: 0.75rem;">PRIMARY TECHNIQUE</div>
+              <div style="font-weight: 600; color: #cbd5e1; margin-top: 2px;">MITRE T1071.001 (Web C2)</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: 6px;">
+              <div style="color: #94a3b8; font-size: 0.75rem;">FIRST SEEN IN WILD</div>
+              <div style="font-weight: 600; color: #cbd5e1; margin-top: 2px;">14 Hours Ago</div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.875rem; color: #94a3b8;">
+            <strong style="color: #38bdf8;">Recommended Autonomous Action:</strong> Block outbound egress port 443/8443 on perimeter firewalls. Invalidate Active Directory OAuth tokens matching this session IP immediately.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Pillars -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag cyber">Defense Architecture</span>
+        <h2 class="section-title">Built for Modern Zero-Trust SecOps</h2>
+        <p class="section-desc">DevotedZen AI CTI acts as an autonomous force multiplier for your Cyber Security Operations Center.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(6, 182, 212, 0.15); color: #06b6d4; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Dark Web Breach Surveillance</h4>
+          <p>Scrapes over 5,000 hidden services, illicit ransomware communication channels, and Telegram extortion chats to detect leaked API keys, tokens, and employee credentials within minutes.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(6, 182, 212, 0.15); color: #06b6d4; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Heuristic MITRE ATT&CK Matrix</h4>
+          <p>Maps disparate, noisy security alarms into complete kill-chain narratives across Initial Access, Defense Evasion, Lateral Movement, and Exfiltration—cutting Mean Time to Detect (MTTD) by 84%.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(6, 182, 212, 0.15); color: #06b6d4; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Seamless SIEM & SOAR Connectors</h4>
+          <p>Native bidirectional API plugins for Splunk Enterprise Security, CrowdStrike Falcon, Microsoft Sentinel, Cortex XSOAR, and custom AWS GuardDuty/Google Cloud Security Command Center environments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-legal-bottom">
+        <div>
+          &copy; 2026 DevotedZen Labs. All rights reserved. &bull; Maitidevi, Kathmandu, Nepal
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="../index.html">Home</a>
+          <a href="sadak-drishti.html">SadakDrishti</a>
+          <a href="ai-fitness-tracker.html">AI Fitness Tracker</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Demo Modal -->
+  <div id="demo-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close close-demo-modal" aria-label="Close Modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div style="margin-bottom: 1.5rem;">
+        <span class="section-tag cyber" style="font-size: 0.725rem; padding: 0.2rem 0.6rem;">ENTERPRISE CTI</span>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem;">Request Threat Intelligence Briefing</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8;">Review custom dark web exposure for your corporate domain with our threat researchers.</p>
+      </div>
+
+      <form id="demo-form">
+        <div class="form-group">
+          <label class="form-label" for="modal-name">Full Name *</label>
+          <input type="text" id="modal-name" class="form-input" placeholder="e.g. Anand Mehra" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-email">Corporate Work Email *</label>
+          <input type="email" id="modal-email" class="form-input" placeholder="ciso@enterprise.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-org">Company / Enterprise Domain *</label>
+          <input type="text" id="modal-org" class="form-input" placeholder="e.g. AcmeBank.com" required>
+        </div>
+        <input type="hidden" id="modal-product-select" value="AI Cyber Threat Intel">
+        <button type="submit" class="btn btn-cyber" style="width: 100%; margin-top: 1rem;">Schedule Briefing</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/simulators.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageSim = window.initCyberSimulator('cyber-page-feed');
+      const injectBtn = document.getElementById('cyber-page-inject');
+      if (injectBtn && pageSim) {
+        injectBtn.addEventListener('click', () => {
+          pageSim.injectAlert();
+          window.showToast('Zero-Day Exploit injected and dynamically neutralized!', 'success');
+        });
+      }
+
+      const iocInput = document.getElementById('ioc-input');
+      const iocBtn = document.getElementById('ioc-btn-search');
+      const resultCard = document.getElementById('ioc-result-card');
+      const targetDisplay = document.getElementById('ioc-target-display');
+      const sampleBtns = document.querySelectorAll('.sample-ioc-btn');
+
+      sampleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (iocInput) iocInput.value = val;
+          performIocLookup(val);
+        });
+      });
+
+      function performIocLookup(query) {
+        if (!query || !query.trim()) return;
+        if (targetDisplay) targetDisplay.textContent = query.trim();
+        if (resultCard) {
+          resultCard.style.display = 'block';
+          resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        window.showToast(`Enriched indicator "${query.trim()}". Threat graph updated!`, 'info');
+      }
+
+      if (iocBtn && iocInput) {
+        iocBtn.addEventListener('click', () => performIocLookup(iocInput.value));
+      }
+    });
+  </script>
+</body>
+</html>

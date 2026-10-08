@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SadakDrishti (सड़क दृष्टि) | AI Road Vision & ASTM D6433 PCI | DevotedZen Labs</title>
+  <meta name="description" content="SadakDrishti by DevotedZen Labs is an autonomous computer vision system for road health inspection, real-time pothole/crack classification, and ASTM D6433 PCI scoring.">
+  <meta name="keywords" content="SadakDrishti, Road Inspection AI, Pothole Detection, Pavement Condition Index, Smart Cities, NHAI, Computer Vision Roads">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../assets/logo-icon.svg">
+
+  <!-- Typography: Manrope (Headings) | Inter (Body) | JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="nav-inner">
+        <a href="../index.html" class="brand-logo" aria-label="DevotedZen Labs Homepage">
+          <img src="../assets/logo-icon.svg" alt="DevotedZen Labs Icon" class="brand-img-icon" width="40" height="40">
+          <div>
+            <div class="brand-name">Devoted<span>Zen</span></div>
+            <div class="brand-badge">Labs</div>
+          </div>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="sadak-drishti.html" class="nav-link active" style="color: var(--sadak-gold);">SadakDrishti</a></li>
+            <li><a href="cyber-threat-intelligence.html" class="nav-link">Cyber Intel</a></li>
+            <li><a href="ai-fitness-tracker.html" class="nav-link">AI Fitness</a></li>
+            <li><a href="../about.html" class="nav-link">About</a></li>
+            <li><a href="../contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-sadak btn-sm open-demo-modal" data-product="SadakDrishti">Request Pilot Survey</button>
+          <button class="mobile-toggle" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Hero -->
+  <section class="hero" style="background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(245, 158, 11, 0.16), transparent 70%);">
+    <div class="container hero-content">
+      <div class="hero-eyebrow">
+        <span class="section-tag sadak">
+          INFRASTRUCTURE COMPUTER VISION
+        </span>
+      </div>
+
+      <h1 class="hero-title">
+        SadakDrishti <span style="font-weight: 400; color: #fbbf24;">(सड़क दृष्टि)</span><br>
+        <span class="text-gradient-sadak">Autonomous AI Road Health Inspection</span>
+      </h1>
+
+      <p class="hero-description">
+        Transforming everyday vehicle dashcams, public buses, and drone footage into an automated, real-time road condition survey network. Detect potholes, cracks, and surface distress before accidents happen.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-sadak btn-lg open-demo-modal" data-product="SadakDrishti">Schedule Live Field Pilot</button>
+        <a href="#specs" class="btn btn-outline btn-lg">Technical Specifications</a>
+      </div>
+
+      <!-- Live Cockpit Simulator -->
+      <div class="cockpit-frame" style="max-width: 980px; margin: 3rem auto 0; text-align: left;">
+        <div class="cockpit-chrome-header">
+          <div class="chrome-dots">
+            <span class="chrome-dot dot-red"></span>
+            <span class="chrome-dot dot-yellow"></span>
+            <span class="chrome-dot dot-green"></span>
+          </div>
+          <div class="chrome-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+            SadakDrishti-AI // Highway Patrol Camera Feed
+          </div>
+          <div class="chrome-status-tag" style="color: #fbbf24;">ASTM D6433 COMPLIANT</div>
+        </div>
+
+        <div class="cockpit-viewport" style="min-height: 420px;">
+          <canvas id="sadak-full-canvas" class="cockpit-canvas" style="height: 420px;"></canvas>
+          <div style="position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; pointer-events: none;">
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">GEOTAG: 28.5355° N, 77.3910° E</span>
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">ROUTE: NH-48 / EXPRESSWAY-SEC-4</span>
+            <span style="background: rgba(9,13,24,0.85); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">PCI: <strong style="color: #34d399;">81 (SATISFACTORY)</strong></span>
+          </div>
+        </div>
+
+        <div class="cockpit-footer">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.75rem; color: #94a3b8; font-family: var(--font-mono);">ENVIRONMENT:</span>
+            <button id="sadak-weather-day" class="btn btn-sm btn-outline" style="padding: 0.25rem 0.65rem;">Daylight</button>
+            <button id="sadak-weather-rain" class="btn btn-sm btn-outline" style="padding: 0.25rem 0.65rem;">Rain/Wet</button>
+            <button id="sadak-weather-night" class="btn btn-sm btn-outline" style="padding: 0.25rem 0.65rem;">Night Vision</button>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="sadak-full-pause" class="btn btn-sm btn-outline">Pause</button>
+            <button id="sadak-full-inject" class="btn btn-sm btn-sadak">+ Trigger Distress Event</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pavement Distress Classification -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag sadak">Pavement Intelligence</span>
+        <h2 class="section-title">Automated Road Anomaly Classification</h2>
+        <p class="section-desc">Trained on hundreds of thousands of kilometers of diverse national highways, state corridors, and municipal streets.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8m-4-4h8"/></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Pothole Metric Estimation</h4>
+          <p>Identifies potholes with 99.1% precision, computing estimated surface area, volume, and depth severity to immediately flag hazardous road craters for emergency patching.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16m-16 0l16-16"/></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Crack & Fatigue Analysis</h4>
+          <p>Differentiates between superficial hairline fissures, longitudinal joints, and dangerous load-related alligator cracking requiring structural base asphalt restoration.</p>
+        </div>
+
+        <div class="zen-card">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M7 5l5 7-5 7M17 5l-5 7 5 7"/></svg>
+          </div>
+          <h4 style="font-size: 1.3rem; margin-bottom: 0.75rem;">Road Markings & Furniture</h4>
+          <p>Audits lane line reflectivity, pedestrian zebra crossing degradation, missing speed breakers, and obscured traffic signs to preserve overall corridor safety.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specifications -->
+  <section id="specs" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag sadak">Deployment Architecture</span>
+        <h2 class="section-title">Zero Friction Edge Deployment</h2>
+        <p class="section-desc">SadakDrishti turns any moving fleet into a continuous surveying force without requiring dedicated high-cost laser vehicles.</p>
+      </div>
+
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <h3 style="font-size: 2rem; margin-bottom: 1.25rem;">Deploy on Patrol Fleets or Existing Municipal Vehicles</h3>
+          <p style="margin-bottom: 1.5rem;">
+            Rather than commissioning costly annual surveying contracts that take months, SadakDrishti runs passively in the background on garbage collection trucks, highway patrol cars, and public transit buses.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.25rem;">
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 0.4rem; border-radius: 6px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div>
+                <strong>Edge Box (NVIDIA Jetson Orin Nano / Nano):</strong> Real-time inference at 60 FPS directly inside the vehicle with zero cellular bandwidth overhead.
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 0.4rem; border-radius: 6px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div>
+                <strong>Smartphone / Dashcam SDK:</strong> Plug-and-play Android and iOS application that utilizes on-device NPU hardware for highway inspections.
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; padding: 0.4rem; border-radius: 6px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div>
+                <strong>Automated GIS Work Order Sync:</strong> Automatically emits geo-tagged GeoJSON/Shapefiles directly into municipal enterprise GIS systems and PWD portals.
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-sadak open-demo-modal" data-product="SadakDrishti">Request Pilot Specification Sheet</button>
+        </div>
+
+        <div class="zen-card" style="padding: 2.75rem; background: #080c16;">
+          <h4 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: #fbbf24;">SadakDrishti Technical Specifications</h4>
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.925rem;">
+            <tr style="border-bottom: 1px solid var(--border-hairline);">
+              <td style="padding: 0.85rem 0; color: #94a3b8;">Detection Inference Speed</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">60 FPS (Sub-16ms)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-hairline);">
+              <td style="padding: 0.85rem 0; color: #94a3b8;">Max Vehicle Speed</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">Up to 110 km/h</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-hairline);">
+              <td style="padding: 0.85rem 0; color: #94a3b8;">Geotag Accuracy</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">Sub-meter GNSS / RTK</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-hairline);">
+              <td style="padding: 0.85rem 0; color: #94a3b8;">Pavement Index Standard</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">ASTM D6433 / IRC</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border-hairline);">
+              <td style="padding: 0.85rem 0; color: #94a3b8;">Distress Categories</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">14 Classifications</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.85rem 0; color: #94a3b8;">GIS Data Export</td>
+              <td style="padding: 0.85rem 0; font-family: var(--font-mono); font-weight: 600; text-align: right;">GeoJSON, ArcGIS, QGIS, CSV</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Corporate Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-legal-bottom">
+        <div>
+          &copy; 2026 DevotedZen Labs. All rights reserved. &bull; Maitidevi, Kathmandu, Nepal
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="../index.html">Home</a>
+          <a href="cyber-threat-intelligence.html">AI Cyber Intel</a>
+          <a href="ai-fitness-tracker.html">AI Fitness Tracker</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Demo Modal -->
+  <div id="demo-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="modal-close close-demo-modal" aria-label="Close Modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div style="margin-bottom: 1.5rem;">
+        <span class="section-tag sadak" style="font-size: 0.725rem; padding: 0.2rem 0.6rem;">SADAKDRISHTI PILOT</span>
+        <h3 style="font-size: 1.5rem; margin-top: 0.5rem;">Request Road Survey Demonstration</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8;">Connect with our infrastructure vision engineers to schedule a road corridor test run.</p>
+      </div>
+
+      <form id="demo-form">
+        <div class="form-group">
+          <label class="form-label" for="modal-name">Full Name *</label>
+          <input type="text" id="modal-name" class="form-input" placeholder="e.g. Ramesh Chandra" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-email">Official Email *</label>
+          <input type="email" id="modal-email" class="form-input" placeholder="name@authority.gov.in" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="modal-org">Organization / Highway Authority *</label>
+          <input type="text" id="modal-org" class="form-input" placeholder="e.g. Municipal Corp / NHAI Concessionaire" required>
+        </div>
+        <input type="hidden" id="modal-product-select" value="SadakDrishti">
+        <button type="submit" class="btn btn-sadak" style="width: 100%; margin-top: 1rem;">Schedule Pilot Demonstration</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/simulators.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fullSim = window.initSadakSimulator('sadak-full-canvas');
+      const pauseBtn = document.getElementById('sadak-full-pause');
+      const injectBtn = document.getElementById('sadak-full-inject');
+      const dayBtn = document.getElementById('sadak-weather-day');
+      const rainBtn = document.getElementById('sadak-weather-rain');
+      const nightBtn = document.getElementById('sadak-weather-night');
+
+      if (pauseBtn && fullSim) {
+        pauseBtn.addEventListener('click', () => {
+          const isPlaying = fullSim.togglePlay();
+          pauseBtn.textContent = isPlaying ? 'Pause' : 'Resume';
+        });
+      }
+      if (injectBtn && fullSim) {
+        injectBtn.addEventListener('click', () => {
+          fullSim.injectAnomaly();
+          window.showToast('Surface distress event triggered and geotagged!', 'success');
+        });
+      }
+      if (dayBtn && fullSim) {
+        dayBtn.addEventListener('click', () => {
+          fullSim.setWeather('day');
+          window.showToast('Environment set to Daylight Clear', 'info');
+        });
+      }
+      if (rainBtn && fullSim) {
+        rainBtn.addEventListener('click', () => {
+          fullSim.setWeather('rain');
+          window.showToast('Environment set to Rain & Wet Pavement reflection mode', 'info');
+        });
+      }
+      if (nightBtn && fullSim) {
+        nightBtn.addEventListener('click', () => {
+          fullSim.setWeather('night');
+          window.showToast('Environment set to Low-Light Night Vision mode', 'info');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "framework": null,
-  "cleanUrls": true,
-  "trailingSlash": false
+  "buildCommand": "mkdir -p dist && cp -r index.html about.html contact.html assets css js products dist/",
+  "outputDirectory": "dist",
+  "cleanUrls": true
 }
